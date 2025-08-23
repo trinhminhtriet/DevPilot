@@ -14,6 +14,7 @@ import picocli.CommandLine.Command;
     subcommands = {
         VersionCommand.class,
         ListCommand.class,
+        AddCommand.class,
         InitCommand.class
     }
 )
