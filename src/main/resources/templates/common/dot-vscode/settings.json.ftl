@@ -1,4 +1,5 @@
 {
   "editor.formatOnSave": true,
-  "terminal.integrated.fontFamily": "MesloLGS NF"
+  "prettier.endOfLine": "lf",
+  "editor.wordWrap": "off"
 }
