@@ -13,6 +13,8 @@ import picocli.CommandLine.Command;
     subcommands = {
         AddReadmeCommand.class,
         AddLicenseCommand.class,
+        AddGitAttributesCommand.class,
+        AddVSCodeCommand.class,
         AddEditorConfigCommand.class
     },
     mixinStandardHelpOptions = true
