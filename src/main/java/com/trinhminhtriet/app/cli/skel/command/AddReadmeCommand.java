@@ -1,5 +1,6 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
+import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import java.io.File;
 import java.util.HashMap;
@@ -21,12 +22,11 @@ public class AddReadmeCommand implements Runnable {
   @Option(names = {"--dir"}, description = "Target directory", defaultValue = ".")
   private File dir;
 
+  private final ConfigService configService;
+
   @Override
   public void run() {
-    Map<String, Object> objectMapping = new HashMap<>();
-    objectMapping.put("projectName", dir.getName());
-    objectMapping.put("authorName", "Trinh Minh Triet");
-    objectMapping.put("authorEmail", "contact@trinhminhtriet.com");
+    Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
     try {
       templateService.renderTemplate("common/README.md.ftl", objectMapping, new File(dir, "README.md"));
       log.info("README.md added to {}", dir.getAbsolutePath());

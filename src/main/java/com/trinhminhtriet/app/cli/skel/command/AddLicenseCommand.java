@@ -1,5 +1,6 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
+import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import java.io.File;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import picocli.CommandLine.Option;
 @RequiredArgsConstructor
 public class AddLicenseCommand implements Runnable {
 
+  private final ConfigService configService;
   private final TemplateRenderService templateService;
 
   @Option(names = {"--dir"}, description = "Target directory", defaultValue = ".")
@@ -23,9 +25,7 @@ public class AddLicenseCommand implements Runnable {
 
   @Override
   public void run() {
-    Map<String, Object> objectMapping = new HashMap<>();
-    objectMapping.put("authorName", "Trinh Minh Triet");
-    objectMapping.put("authorEmail", "contact@trinhminhtriet.com");
+    Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
     try {
       templateService.renderTemplate("common/LICENSE.ftl", objectMapping, new File(dir, "LICENSE"));
       log.info("LICENSE added to {}", dir.getAbsolutePath());

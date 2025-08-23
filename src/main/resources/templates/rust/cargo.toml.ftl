@@ -1,7 +1,7 @@
 [package]
-name = "${projectName}"
+name = "${project.name}"
 version = "0.1.0"
 edition = "2021"
-authors = ["${authorName} <${authorEmail}>"]
+authors = ["${author.name} <${author.email}>"]
 
 [dependencies]

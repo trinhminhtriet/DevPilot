@@ -2,72 +2,90 @@ package com.trinhminhtriet.app.cli.skel.service.impl;
 
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Properties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.Yaml;
 
 @Service
 @RequiredArgsConstructor
 public class ConfigServiceImpl implements ConfigService {
 
-  @Value("${skel.author.name}")
+  @Value("${skel.author.name:}")
   private String authorName;
 
-  @Value("${skel.author.email}")
+  @Value("${skel.author.email:}")
   private String authorEmail;
 
-  @Value("${skel.license.name}")
+  @Value("${skel.license.name:MIT}")
   private String licenseName;
 
-  private static final String CONFIG_PATH = System.getenv("HOME") + "/.skel/config.yml";
-  private final Yaml yaml = new Yaml();
-
+  private static final String CONFIG_PATH = System.getProperty("user.home") + "/.skel/config.properties";
 
   @Override
-  public Map<String, String> loadConfig() {
+  public Map<String, Object> loadConfig() {
     File file = new File(CONFIG_PATH);
+    Properties props = new Properties();
     if (!file.exists()) {
-      // Tạo file config mặc định
-      Map<String, String> defaultConfig = new HashMap<>();
-      defaultConfig.put("author.name", authorName);
-      defaultConfig.put("author.email", authorEmail);
-      defaultConfig.put("license.name", licenseName);
-      saveConfig(defaultConfig);
-      return defaultConfig;
-    }
-    try {
-      String content = new String(Files.readAllBytes(Paths.get(CONFIG_PATH)));
-      Map<String, Object> map = yaml.load(content);
-      Map<String, String> result = new HashMap<>();
-      if (map != null) {
-        map.forEach((k, v) -> result.put(k, v == null ? "" : v.toString()));
+      props.setProperty("author.name", authorName != null ? authorName : System.getProperty("user.name", ""));
+      props.setProperty("author.email", authorEmail != null ? authorEmail : "your@email.com");
+      props.setProperty("license.name", licenseName != null ? licenseName : "MIT");
+      saveConfig(propertiesToNestedMap(props));
+    } else {
+      try (FileInputStream fis = new FileInputStream(file)) {
+        props.load(fis);
+      } catch (IOException e) {
+        // ignore, return empty
       }
-      return result;
-    } catch (IOException e) {
-      return new HashMap<>();
+    }
+    return propertiesToNestedMap(props);
+  }
+
+  /**
+   * Helper to set nested value in map for key like a.b.c
+   */
+  private void setNestedValue(Map<String, Object> map, String key, String value) {
+    String[] parts = key.split("\\.");
+    Map<String, Object> current = map;
+    for (int i = 0; i < parts.length - 1; i++) {
+      current = (Map<String, Object>) current.computeIfAbsent(parts[i], k -> new HashMap<>());
+    }
+    current.put(parts[parts.length - 1], value);
+  }
+
+  private Map<String, Object> propertiesToNestedMap(Properties props) {
+    Map<String, Object> nested = new HashMap<>();
+    for (String key : props.stringPropertyNames()) {
+      setNestedValue(nested, key, props.getProperty(key));
+    }
+    return nested;
+  }
+
+  private void flattenMap(String prefix, Map<String, Object> map, Properties props) {
+    for (Map.Entry<String, Object> entry : map.entrySet()) {
+      String key = prefix.isEmpty() ? entry.getKey() : prefix + "." + entry.getKey();
+      Object value = entry.getValue();
+      if (value instanceof Map) {
+        flattenMap(key, (Map<String, Object>) value, props);
+      } else {
+        props.setProperty(key, value != null ? value.toString() : "");
+      }
     }
   }
 
   @Override
-  public Optional<String> getConfigValue(String key) {
-    Map<String, String> config = loadConfig();
-    return Optional.ofNullable(config.get(key));
-  }
-
-  @Override
-  public void saveConfig(Map<String, String> config) {
+  public void saveConfig(Map<String, Object> config) {
     File file = new File(CONFIG_PATH);
     file.getParentFile().mkdirs();
-    try (FileWriter writer = new FileWriter(file)) {
-      yaml.dump(config, writer);
+    Properties props = new Properties();
+    flattenMap("", config, props);
+    try (FileOutputStream fos = new FileOutputStream(file)) {
+      props.store(fos, "Skel CLI config");
     } catch (IOException e) {
       throw new RuntimeException("Failed to save config", e);
     }

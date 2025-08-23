@@ -1,5 +1,5 @@
-NAME    := ${projectName}
-AUTHOR  := $${authorname}
+NAME    := ${project.name}
+AUTHOR  := $${author.name}
 DATE    := $(shell date +%FT%T%Z)
 GIT     := $(shell [ -d .git ] && git rev-parse --short HEAD)
 VERSION := $(shell git describe --tags)
