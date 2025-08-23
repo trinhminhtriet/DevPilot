@@ -15,19 +15,20 @@ import picocli.CommandLine.Option;
 @Command(name = "editorconfig", description = "Add .editorconfig to current directory", mixinStandardHelpOptions = true)
 @RequiredArgsConstructor
 public class AddEditorConfigCommand implements Runnable {
-    private final TemplateRenderService templateService;
 
-    @Option(names = {"--dir"}, description = "Target directory", defaultValue = ".")
-    private File dir;
+  private final TemplateRenderService templateService;
 
-    @Override
-    public void run() {
-        Map<String, Object> objectMapping = new HashMap<>();
-        try {
-            templateService.renderTemplate("common/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-            log.info(".editorconfig added to {}", dir.getAbsolutePath());
-        } catch (Exception e) {
-            log.error("Failed to add .editorconfig", e);
-        }
+  @Option(names = {"--dir"}, description = "Target directory", defaultValue = ".")
+  private File dir;
+
+  @Override
+  public void run() {
+    Map<String, Object> objectMapping = new HashMap<>();
+    try {
+      templateService.renderTemplate("common/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      log.info(".editorconfig added to {}", dir.getAbsolutePath());
+    } catch (Exception e) {
+      log.error("Failed to add .editorconfig", e);
     }
+  }
 }
