@@ -12,6 +12,7 @@ import picocli.CommandLine.Command;
     description = "Initialize project scaffolding",
     subcommands = {
         RustInitCommand.class,
+        PythonInitCommand.class,
         GoInitCommand.class
     }
 )

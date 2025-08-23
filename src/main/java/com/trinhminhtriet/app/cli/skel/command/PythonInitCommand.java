@@ -12,11 +12,11 @@ import picocli.CommandLine.Option;
 @Slf4j
 @Component
 @Command(
-    name = "rust",
-    description = "Initialize a new Rust project",
+    name = "python",
+    description = "Initialize a new Python project",
     mixinStandardHelpOptions = true
 )
-public class RustInitCommand implements Runnable {
+public class PythonInitCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;
@@ -29,14 +29,14 @@ public class RustInitCommand implements Runnable {
 
   private final TemplateRenderService templateService;
 
-  public RustInitCommand(TemplateRenderService templateService) {
+  public PythonInitCommand(TemplateRenderService templateService) {
     this.templateService = templateService;
   }
 
   @Override
   public void run() {
     if (debug) {
-      log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
+      log.debug("Starting Python project initialization with projectName={} in dir={}", projectName, dir);
     }
 
     if (!dir.exists() && !dir.mkdirs()) {
@@ -51,22 +51,21 @@ public class RustInitCommand implements Runnable {
     try {
       templateService.renderCommonTemplates(objectMapping, dir);
 
-      templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-
-      templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
-
       // Create src directory
       File srcDir = new File(dir, "src");
       if (!srcDir.exists() && !srcDir.mkdirs()) {
         throw new IllegalStateException("Failed to create src directory: " + srcDir);
       }
 
-      // main.rs
-      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
+      // main.py
+      templateService.renderTemplate("python/src/main.py.ftl", objectMapping, new File(srcDir, "main.py"));
 
-      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+      // requirements.txt
+      templateService.renderTemplate("python/requirements.txt.ftl", objectMapping, new File(dir, "requirements.txt"));
+
+      log.info("Python project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
     } catch (Exception e) {
-      log.error("Failed to initialize Rust project", e);
+      log.error("Failed to initialize Python project", e);
       throw new RuntimeException(e);
     }
   }
