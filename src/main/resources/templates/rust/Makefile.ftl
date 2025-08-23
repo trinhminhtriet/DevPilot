@@ -1,4 +1,4 @@
-NAME    := ${project.name}
+NAME    := ${projectName}
 AUTHOR  := $${author.name}
 DATE    := $(shell date +%FT%T%Z)
 GIT     := $(shell [ -d .git ] && git rev-parse --short HEAD)

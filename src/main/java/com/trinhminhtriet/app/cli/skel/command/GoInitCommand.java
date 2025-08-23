@@ -45,6 +45,7 @@ public class GoInitCommand implements Runnable {
     }
 
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
+    objectMapping.put("projectName", projectName);
 
     try {
       templateService.renderCommonTemplates(objectMapping, dir);

@@ -1,5 +1,5 @@
 [package]
-name = "${project.name}"
+name = "${projectName}"
 version = "0.1.0"
 edition = "2021"
 authors = ["${author.name} <${author.email}>"]
