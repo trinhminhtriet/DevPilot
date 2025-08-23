@@ -1,12 +1,12 @@
 package com.trinhminhtriet.app.cli.skel.service.impl;
 
-import com.trinhminhtriet.app.cli.skel.service.GeneratorService;
+import com.trinhminhtriet.app.cli.skel.service.ProjectGeneratorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class GeneratorServiceImpl implements GeneratorService {
+public class ProjectGeneratorServiceImpl implements ProjectGeneratorService {
 
   @Override
   public void generate(String language, String projectName) {

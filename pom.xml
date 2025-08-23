@@ -29,6 +29,7 @@
   </scm>
   <properties>
     <java.version>21</java.version>
+    <picocli.version>4.7.7</picocli.version>
   </properties>
   <dependencies>
     <dependency>
@@ -52,6 +53,22 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.18.38</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+      <version>${picocli.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli-spring-boot-starter</artifactId>
+      <version>${picocli.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli-codegen</artifactId>
+      <version>${picocli.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

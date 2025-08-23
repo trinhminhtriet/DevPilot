@@ -1,6 +1,6 @@
 package com.trinhminhtriet.app.cli.skel.service;
 
-public interface GeneratorService {
+public interface ProjectGeneratorService {
 
   /**
    * Generate project skeleton for given language
