@@ -1,39 +1,74 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
-import java.io.IOException;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
-import picocli.CommandLine.Parameters;
+import picocli.CommandLine.Option;
 
-@Log4j2
+@Slf4j
 @Component
-@RequiredArgsConstructor
-@Command(name = "rust", description = "Generate a Rust project scaffold")
+@Command(
+    name = "rust",
+    description = "Initialize a new Rust project",
+    mixinStandardHelpOptions = true
+)
 public class RustInitCommand implements Runnable {
 
-  private final TemplateRenderService templateRenderService;
-
-  @Parameters(index = "0", description = "Project name")
+  @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;
+
+  @Option(names = {"--dir"}, required = true, description = "Target directory")
+  private File dir;
+
+  @Option(names = {"--debug"}, description = "Enable debug logging")
+  private boolean debug;
+
+  private final TemplateRenderService templateService;
+
+  public RustInitCommand(TemplateRenderService templateService) {
+    this.templateService = templateService;
+  }
 
   @Override
   public void run() {
-    Map<String, Object> data = new HashMap<>();
-    data.put("projectName", projectName);
-    data.put("author", System.getProperty("user.name"));
+    if (debug) {
+      log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
+    }
 
-    String baseDir = "./" + projectName;
+    if (!dir.exists() && !dir.mkdirs()) {
+      throw new IllegalStateException("Failed to create directory: " + dir);
+    }
+
+    Map<String, Object> objectMapping = new HashMap<>();
+    objectMapping.put("projectName", projectName);
+    objectMapping.put("authorName", "Trinh Minh Triet");
+    objectMapping.put("authorEmail", "contact@trinhminhtriet.com");
+
     try {
-      templateRenderService.renderTemplate("common/README.md.ftl", data, baseDir + "/README.md");
-      templateRenderService.renderTemplate("common/LICENSE.ftl", data, baseDir + "/LICENSE");
-      templateRenderService.renderTemplate("rust/cargo.toml.ftl", data, baseDir + "/Cargo.toml");
-    } catch (IOException e) {
-      log.error("Failed to generate project {}", projectName, e);
+      // README.md
+      templateService.renderTemplate("common/README.md.ftl", objectMapping, new File(dir, "README.md"));
+
+      // LICENSE
+      templateService.renderTemplate("common/LICENSE.ftl", objectMapping, new File(dir, "LICENSE"));
+
+      // Cargo.toml
+      templateService.renderTemplate("rust/cargo.toml.ftl", objectMapping, new File(dir, "Cargo.toml"));
+
+      // src/main.rs
+      File srcDir = new File(dir, "src");
+      if (!srcDir.exists() && !srcDir.mkdirs()) {
+        throw new IllegalStateException("Failed to create src directory: " + srcDir);
+      }
+      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
+
+      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+    } catch (Exception e) {
+      log.error("Failed to initialize Rust project", e);
+      throw new RuntimeException(e);
     }
   }
 }
