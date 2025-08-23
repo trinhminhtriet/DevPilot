@@ -12,13 +12,13 @@ import picocli.CommandLine.Option;
 @Slf4j
 @Component
 @Command(
-    name = "rust",
-    description = "Initialize a new Rust project",
+    name = "go",
+    description = "Initialize a new Go project",
     mixinStandardHelpOptions = true
 )
-public class RustInitCommand implements Runnable {
+public class GoInitCommand implements Runnable {
 
-  @Option(names = {"--name"}, required = true, description = "Project name")
+  @Option(names = {"--name"}, required = true, description = "Project projectName")
   private String projectName;
 
   @Option(names = {"--dir"}, required = true, description = "Target directory")
@@ -29,14 +29,14 @@ public class RustInitCommand implements Runnable {
 
   private final TemplateRenderService templateService;
 
-  public RustInitCommand(TemplateRenderService templateService) {
+  public GoInitCommand(TemplateRenderService templateService) {
     this.templateService = templateService;
   }
 
   @Override
   public void run() {
     if (debug) {
-      log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
+      log.debug("Starting Go project initialization with projectName={} in dir={}", projectName, dir);
     }
 
     if (!dir.exists() && !dir.mkdirs()) {
@@ -51,20 +51,18 @@ public class RustInitCommand implements Runnable {
     try {
       templateService.renderCommonTemplates(objectMapping, dir);
 
-      templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-
       // Create src directory
       File srcDir = new File(dir, "src");
       if (!srcDir.exists() && !srcDir.mkdirs()) {
         throw new IllegalStateException("Failed to create src directory: " + srcDir);
       }
 
-      // main.rs
-      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
+      // main.go
+      templateService.renderTemplate("go/src/main.go.ftl", objectMapping, new File(srcDir, "main.go"));
 
-      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+      log.info("Go project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
     } catch (Exception e) {
-      log.error("Failed to initialize Rust project", e);
+      log.error("Failed to initialize Go project", e);
       throw new RuntimeException(e);
     }
   }

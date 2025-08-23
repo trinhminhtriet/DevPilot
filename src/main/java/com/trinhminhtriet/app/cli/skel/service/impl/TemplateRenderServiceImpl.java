@@ -41,4 +41,17 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
       throw new IOException("Template rendering failed", e);
     }
   }
+
+  @Override
+  public void renderCommonTemplates(Map<String, Object> data, File targetDir) throws IOException {
+    String[][] templates = {
+        {"common/README.md.ftl", "README.md"},
+        {"common/LICENSE.ftl", "LICENSE"},
+        {"common/CHANGELOG.md.ftl", "CHANGELOG.md"}
+    };
+    for (String[] tpl : templates) {
+      File outFile = new File(targetDir, tpl[1]);
+      renderTemplate(tpl[0], data, outFile);
+    }
+  }
 }
