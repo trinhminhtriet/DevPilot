@@ -12,7 +12,7 @@ best practices and templates.
 
 ---
 
-## Features
+## ✨ Features
 
 - 🚀 Generate project scaffolds for multiple languages (Rust, Go, Python, TypeScript).
 - 📑 Built-in templates for:
@@ -29,7 +29,7 @@ best practices and templates.
 
 ---
 
-## Installation
+## 🚀 Installation
 
 ### Prerequisites
 
@@ -44,7 +44,7 @@ cd skel-cli
 mvn clean package
 ```
 
-## Usage
+## 💡 Usage
 
 ### Run help
 
@@ -70,3 +70,18 @@ java -jar target/skel-0.0.1-SNAPSHOT.jar init rust --name MyRustApp --dir ./MyRu
 ```shell
 java -jar target/skel-0.0.1-SNAPSHOT.jar init go --name MyGoApp --dir ./MyGoApp
 ```
+
+## 🤝 How to contribute
+
+We welcome contributions!
+
+- Fork this repository;
+- Create a branch with your feature: `git checkout -b my-feature`;
+- Commit your changes: `git commit -m "feat: my new feature"`;
+- Push to your branch: `git push origin my-feature`.
+
+Once your pull request has been merged, you can delete your branch.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
