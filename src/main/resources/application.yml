@@ -3,3 +3,12 @@ spring:
     name: skel
   main:
     banner-mode: off
+
+skel:
+  author:
+    name: "Trinh Minh Triet"
+    email: "contact@trinhminhtriet.com"
+    website: "https://trinhminhtriet.com"
+  version: "1.0.0"
+  license:
+    name: "MIT"
