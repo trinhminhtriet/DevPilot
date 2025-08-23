@@ -71,6 +71,12 @@ java -jar target/skel-0.0.1-SNAPSHOT.jar init rust --name MyRustApp --dir ./MyRu
 java -jar target/skel-0.0.1-SNAPSHOT.jar init go --name MyGoApp --dir ./MyGoApp
 ```
 
+### Generate Python project
+
+```shell
+java -jar target/skel-0.0.1-SNAPSHOT.jar init python --name MyPythonApp --dir ./MyPythonApp
+```
+
 ## 🤝 How to contribute
 
 We welcome contributions!
