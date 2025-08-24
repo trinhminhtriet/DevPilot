@@ -16,9 +16,9 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-    name = "go",
-    description = "Initialize a new Go project",
-    mixinStandardHelpOptions = true
+  name = "go",
+  description = "Initialize a new Go project",
+  mixinStandardHelpOptions = true
 )
 public class InitGoCommand implements Runnable {
 
@@ -40,8 +40,8 @@ public class InitGoCommand implements Runnable {
       log.debug("Starting Go project initialization with name={} in dir={}", projectName, dir);
     }
 
-    if (!dir.exists() && !dir.mkdirs()) {
-      throw new IllegalStateException("Failed to create directory: " + dir);
+    if (!dir.exists()) {
+      dir.mkdirs();
     }
 
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
@@ -49,37 +49,21 @@ public class InitGoCommand implements Runnable {
 
     try {
       templateService.renderCommonTemplates(objectMapping, dir);
-    } catch (IOException e) {
-      log.error("❌ Error generating common templates {}", dir, e);
-      throw new RuntimeException(e);
-    }
 
-    try {
-      // .editorconfig
-      templateService.renderTemplate("golang/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      templateService.renderTemplate("go/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      templateService.renderTemplate("go/go.mod.ftl", objectMapping, new File(dir, "go.mod"));
+      templateService.renderTemplate("go/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
 
-      // go.mod
-      templateService.renderTemplate("golang/go.mod.ftl", objectMapping, new File(dir, "go.mod"));
-
-      // .gitignore
-      templateService.renderTemplate("golang/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
-
-      // Create src directory
       File srcDir = new File(dir, "src");
-      if (!srcDir.exists() && !srcDir.mkdirs()) {
-        throw new IllegalStateException("Failed to create src directory.");
+      if (!srcDir.exists()) {
+        srcDir.mkdirs();
       }
 
-      // main.go
       templateService.renderTemplate("go/src/main.go.ftl", objectMapping, new File(srcDir, "main.go"));
 
       log.info("Go project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
-    } catch (Exception e) {
-      log.error("Failed to initialize Go project", e);
-      throw new RuntimeException(e);
+    } catch (IOException e) {
+      log.error("Error initializing Go project", e);
     }
-
-    log.info("Go project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
-
   }
 }

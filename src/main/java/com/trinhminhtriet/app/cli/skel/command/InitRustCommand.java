@@ -16,9 +16,9 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-    name = "rust",
-    description = "Initialize a new Rust project",
-    mixinStandardHelpOptions = true
+  name = "rust",
+  description = "Initialize a new Rust project",
+  mixinStandardHelpOptions = true
 )
 public class InitRustCommand implements Runnable {
 
@@ -40,49 +40,39 @@ public class InitRustCommand implements Runnable {
       log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
     }
 
-    if (!dir.exists() && !dir.mkdirs()) {
-      throw new IllegalStateException("Failed to create directory: " + dir);
-    }
+    createDirectory(dir);
 
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
     objectMapping.put("projectName", projectName);
 
-    try {
-      templateService.renderCommonTemplates(objectMapping, dir);
-    } catch (IOException e) {
-      log.error("❌ Error generating common templates {}", dir, e);
-      throw new RuntimeException(e);
-    }
+    renderTemplate(() -> templateService.renderCommonTemplates(objectMapping, dir));
+    renderTemplate(() -> templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig")));
+    renderTemplate(() -> templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile")));
 
-    try {
-      templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-    } catch (IOException e) {
-      log.error("❌ Error generating .editorconfig in {}", dir, e);
-      throw new RuntimeException(e);
-    }
-
-    try {
-      templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
-    } catch (IOException e) {
-      log.error("❌ Error generating Makefile in {}", dir, e);
-      throw new RuntimeException(e);
-    }
-
-    // Create src directory
     File srcDir = new File(dir, "src");
-    if (!srcDir.exists() && !srcDir.mkdirs()) {
-      log.error("❌ Failed to create src directory: {}", srcDir);
-      throw new RuntimeException();
-    }
+    createDirectory(srcDir);
 
-    // main.rs
-    try {
-      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
-    } catch (IOException e) {
-      log.error("❌ Error generating main.rs in {}", dir, e);
-      throw new RuntimeException(e);
-    }
+    renderTemplate(() -> templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs")));
 
     log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+  }
+
+  private void createDirectory(File directory) {
+    if (!directory.exists() && !directory.mkdirs()) {
+      throw new RuntimeException();
+    }
+  }
+
+  private void renderTemplate(RenderAction action) {
+    try {
+      action.run();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  @FunctionalInterface
+  private interface RenderAction {
+    void run() throws IOException;
   }
 }
