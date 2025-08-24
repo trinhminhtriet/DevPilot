@@ -16,4 +16,9 @@ public interface ConfigService {
    * Save config to ~/.skel/config.yml
    */
   void saveConfig(Map<String, Object> config);
+
+    /**
+   * Get flatten value by key (e.g. "user.name") from config
+   */
+  String getValue(String key);
 }

@@ -12,10 +12,11 @@ import picocli.CommandLine.Command;
     version = "skel 1.0.0",
     description = "Project scaffolding CLI generator",
     subcommands = {
-        VersionCommand.class,
-        ListCommand.class,
+        GitCommand.class,
         AddCommand.class,
-        InitCommand.class
+        InitCommand.class,
+        ListCommand.class,
+        VersionCommand.class,
     }
 )
 public class RootCommand implements Runnable {

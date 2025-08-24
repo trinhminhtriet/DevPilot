@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ConfigServiceImpl implements ConfigService {
 
-  @Value("${skel.author.name:}")
+  @Value("${skel.user.name:}")
   private String authorName;
 
-  @Value("${skel.author.email:}")
+  @Value("${skel.user.email:}")
   private String authorEmail;
 
   @Value("${skel.license.name:MIT}")
@@ -32,8 +32,6 @@ public class ConfigServiceImpl implements ConfigService {
     File file = new File(CONFIG_PATH);
     Properties props = new Properties();
     if (!file.exists()) {
-      props.setProperty("author.name", authorName != null ? authorName : System.getProperty("user.name", ""));
-      props.setProperty("author.email", authorEmail != null ? authorEmail : "your@email.com");
       props.setProperty("license.name", licenseName != null ? licenseName : "MIT");
       saveConfig(propertiesToNestedMap(props));
     } else {
@@ -89,5 +87,23 @@ public class ConfigServiceImpl implements ConfigService {
     } catch (IOException e) {
       throw new RuntimeException("Failed to save config", e);
     }
+  }
+
+  @Override
+  public String getValue(String key) {
+    Map<String, Object> config = loadConfig();
+    String[] parts = key.split("\\.");
+    Object current = config;
+    for (String part : parts) {
+      if (current instanceof Map) {
+        current = ((Map<?, ?>) current).get(part);
+      } else {
+        return null;
+      }
+      if (current == null) {
+        return null;
+      }
+    }
+    return current != null ? current.toString() : null;
   }
 }
