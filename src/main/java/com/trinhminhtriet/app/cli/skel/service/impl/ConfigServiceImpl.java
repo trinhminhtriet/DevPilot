@@ -8,21 +8,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class ConfigServiceImpl implements ConfigService {
-
-  @Value("${skel.user.name:}")
-  private String authorName;
-
-  @Value("${skel.user.email:}")
-  private String authorEmail;
-
-  @Value("${skel.license.name:MIT}")
-  private String licenseName;
 
   private static final String CONFIG_PATH = System.getProperty("user.home") + "/.skel/config.yml";
 
@@ -31,7 +21,7 @@ public class ConfigServiceImpl implements ConfigService {
     File file = new File(CONFIG_PATH);
     Map<String, Object> config = new HashMap<>();
     if (!file.exists()) {
-      config.put("license", Map.of("name", licenseName != null ? licenseName : "MIT"));
+      config.put("license", "MIT");
       saveConfig(config);
     } else {
       try (FileInputStream fis = new FileInputStream(file)) {
