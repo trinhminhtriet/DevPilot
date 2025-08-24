@@ -53,13 +53,14 @@ public class InitRustCommand implements Runnable {
       templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
       templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
       templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
+      templateService.renderTemplate("rust/Cargo.toml.ftl", objectMapping, new File(dir, "Cargo.toml"));
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
         srcDir.mkdirs();
       }
 
-      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main"));
+      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
 
       log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
     } catch (IOException e) {
