@@ -53,6 +53,7 @@ public class InitRustCommand implements Runnable {
       templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
       templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
       templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
+      templateService.renderTemplate("rust/clippy.toml.ftl", objectMapping, new File(dir, "clippy.toml"));
       templateService.renderTemplate("rust/Cargo.toml.ftl", objectMapping, new File(dir, "Cargo.toml"));
 
       File srcDir = new File(dir, "src");
