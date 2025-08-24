@@ -12,6 +12,7 @@ import picocli.CommandLine.Command;
     version = "skel 1.0.0",
     description = "Project scaffolding CLI generator",
     subcommands = {
+        RefactorCommand.class,
         GitCommand.class,
         AddCommand.class,
         InitCommand.class,
