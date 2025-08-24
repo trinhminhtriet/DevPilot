@@ -15,6 +15,7 @@ import picocli.CommandLine.Command;
         InitGoCommand.class,
         InitRustCommand.class,
         InitPythonCommand.class,
+        InitTypescriptCommand.class,
     }
 )
 @RequiredArgsConstructor

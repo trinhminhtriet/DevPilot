@@ -2,9 +2,9 @@
 [project]
 name = "${projectName}"
 version = "0.1.0"
-description = "${description!default('A Python project')}"
+description = "A Python project"
 authors = [
-    { name = "${author.name!default('Your Name')}", email = "${author.email!default('your@email.com')}" }
+    { name = "${user.name}", email = "${user.email}" }
 ]
 readme = "README.md"
 requires-python = ">=3.8"

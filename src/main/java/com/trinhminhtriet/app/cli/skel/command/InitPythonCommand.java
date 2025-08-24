@@ -63,10 +63,9 @@ public class InitPythonCommand implements Runnable {
 
       templateService.renderTemplate("python/src/main.py.ftl", objectMapping, new File(srcDir, "main.py"));
 
+      log.info("Python project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-
-    log.info("Python project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
   }
 }

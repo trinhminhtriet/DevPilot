@@ -62,7 +62,7 @@ public class InitRustCommand implements Runnable {
 
       templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
 
-      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
     } catch (IOException e) {
       log.error("Error initializing Rust project", e);
     }

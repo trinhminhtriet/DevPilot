@@ -16,11 +16,11 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-    name = "go",
-    description = "Initialize a new Go project",
+    name = "typescript",
+    description = "Initialize a new TypeScript project",
     mixinStandardHelpOptions = true
 )
-public class InitGoCommand implements Runnable {
+public class InitTypescriptCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;
@@ -37,35 +37,32 @@ public class InitGoCommand implements Runnable {
   @Override
   public void run() {
     if (debug) {
-      log.debug("Starting Go project initialization with name={} in dir={}", projectName, dir);
+      log.debug("Starting TypeScript project initialization with name={} in dir={}", projectName, dir);
     }
-
     try {
       if (!dir.exists()) {
         dir.mkdirs();
       }
-
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
       objectMapping.put("projectName", projectName);
-
       templateService.renderCommonTemplates(objectMapping, dir);
-
-      templateService.renderTemplate("go/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
-      templateService.renderTemplate("go/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
-      templateService.renderTemplate("go/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-      templateService.renderTemplate("go/go.mod.ftl", objectMapping, new File(dir, "go.mod"));
-      templateService.renderTemplate("go/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
-
+      templateService.renderTemplate("typescript/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+      templateService.renderTemplate("typescript/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
+      templateService.renderTemplate("typescript/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      templateService.renderTemplate("typescript/package.json.ftl", objectMapping, new File(dir, "package.json"));
+      templateService.renderTemplate("typescript/tsconfig.json.ftl", objectMapping, new File(dir, "tsconfig.json"));
+      templateService.renderTemplate("typescript/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
+      
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
         srcDir.mkdirs();
       }
-
-      templateService.renderTemplate("go/src/main.go.ftl", objectMapping, new File(srcDir, "main.go"));
-
-      log.info("Go project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
+      
+      templateService.renderTemplate("typescript/src/index.ts.ftl", objectMapping, new File(srcDir, "index.ts"));
+      
+      log.info("TypeScript project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
     } catch (IOException e) {
-      log.error("Error initializing Go project", e);
+      log.error("Error initializing TypeScript project", e);
     }
   }
 }
