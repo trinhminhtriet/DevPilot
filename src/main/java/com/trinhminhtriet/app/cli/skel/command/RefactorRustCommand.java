@@ -100,8 +100,8 @@ public class RefactorRustCommand implements Runnable {
     String oldHomepage = toml.getString("package.homepage");
     String newHomepage = "https://trinhminhtriet.com/";
     if (oldHomepage != null && !oldHomepage.equals(newHomepage)) {
-        replaceInFiles(dir, extensions, (content, file) -> content.replace(oldHomepage, newHomepage));
-        log.info("Replaced homepage '{}' with '{}'", oldHomepage, newHomepage);
+      replaceInFiles(dir, extensions, (content, file) -> content.replace(oldHomepage, newHomepage));
+      log.info("Replaced homepage '{}' with '{}'", oldHomepage, newHomepage);
     }
 
     String oldRepository = toml.getString("package.repository");
@@ -110,6 +110,26 @@ public class RefactorRustCommand implements Runnable {
     if (oldRepository != null && !oldRepository.equals(newRepository)) {
       replaceInFiles(dir, extensions, (content, file) -> content.replace(oldRepository, newRepository));
       log.info("Replaced repository '{}' with '{}'", oldRepository, newRepository);
+    }
+
+    if (oldRepository != null && oldRepository.contains("github.com")) {
+      String[] parts = oldRepository.split("/");
+      if (parts.length >= 5) {
+        String oldGithubUserName = parts[3];
+        String oldGithubRepo = parts[4];
+
+        String newGithubUserName = "trinhminhtriet";
+        if (oldGithubUserName != null && !oldGithubUserName.equals(newGithubUserName)) {
+          replaceInFiles(dir, extensions, (content, file) -> content.replace(oldGithubUserName, newGithubUserName));
+          log.info("Replaced github username '{}' with '{}'", oldGithubUserName, newGithubUserName);
+        }
+
+        String newGithubRepo = dir.getName();
+        if (oldGithubUserName != null && !oldGithubUserName.equals(newGithubRepo)) {
+          replaceInFiles(dir, extensions, (content, file) -> content.replace(oldGithubUserName, newGithubRepo));
+          log.info("Replaced github repo name '{}' with '{}'", oldGithubUserName, newGithubRepo);
+        }
+      }
     }
 
   }
