@@ -56,8 +56,8 @@ public class RefactorRustCommand implements Runnable {
 
   private void overrideCargoToml(File cargoToml) throws IOException {
     Toml toml = new Toml().read(cargoToml);
+
     var authors = toml.getList("package.authors");
-    log.info("Original package.authors={}", authors);
     String oldAuthorName = "";
     String oldAuthorEmail = "";
     if (authors == null || authors.isEmpty()) {
@@ -67,27 +67,49 @@ public class RefactorRustCommand implements Runnable {
         String authorStr = author.toString();
         oldAuthorName = authorStr.replaceAll("\\s*<.*?>\\s*", "").trim();
         oldAuthorEmail = authorStr.replaceAll(".*<([^>]+)>.*", "$1").trim();
-        log.info("Processing author: name='{}', email='{}'", oldAuthorName, oldAuthorEmail);
       }
     }
 
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
     Map<String, Object> newAuthor = (HashMap<String, Object>) objectMapping.get("user");
 
-    String[] extensions = {".rs", ".yml", ".yaml", ".toml", ".md", ".txt"};
+    String[] extensions = {".rs", ".sh", ".yml", ".yaml", ".toml", ".md", ".txt"};
 
-    if (!oldAuthorName.isEmpty()) {
+    String newAuthorName = (String) newAuthor.get("name");
+    if (!oldAuthorName.isEmpty() && !oldAuthorName.equals(newAuthorName)) {
       String finalOldAuthorName = oldAuthorName;
-      String newAuthorName = (String) newAuthor.get("name");
       replaceInFiles(dir, extensions, (content, file) -> content.replace(finalOldAuthorName, newAuthorName));
       log.info("Replaced author name '{}' with '{}'", finalOldAuthorName, newAuthorName);
     }
 
-    if (!oldAuthorEmail.isEmpty()) {
+    String newAuthorEmail = (String) newAuthor.get("email");
+    if (!oldAuthorEmail.isEmpty() && !oldAuthorEmail.equals(newAuthorEmail)) {
       String finalOldAuthorEmail = oldAuthorEmail;
-      String newAuthorEmail = (String) newAuthor.get("email");
       replaceInFiles(dir, extensions, (content, file) -> content.replace(finalOldAuthorEmail, newAuthorEmail));
       log.info("Replaced author email '{}' with '{}'", finalOldAuthorEmail, newAuthorEmail);
+    }
+
+    // TODO: get newLicense from config
+    String newLicense = "MIT";//objectMapping.get("license");
+    String oldLicense = toml.getString("package.license");
+    if (oldLicense != null && !newLicense.equals(oldLicense)) {
+      replaceInFiles(dir, extensions, (content, file) -> content.replace(oldLicense, newLicense));
+      log.info("Replaced license '{}' with '{}'", oldLicense, newLicense);
+    }
+
+    String oldHomepage = toml.getString("package.homepage");
+    String newHomepage = "https://trinhminhtriet.com/";
+    if (oldHomepage != null && !oldHomepage.equals(newHomepage)) {
+        replaceInFiles(dir, extensions, (content, file) -> content.replace(oldHomepage, newHomepage));
+        log.info("Replaced homepage '{}' with '{}'", oldHomepage, newHomepage);
+    }
+
+    String oldRepository = toml.getString("package.repository");
+//    String newRepository = (String) objectMapping.getOrDefault("repository", "");
+    String newRepository = "https://github.com/trinhminhtriet/" + dir.getName();
+    if (oldRepository != null && !oldRepository.equals(newRepository)) {
+      replaceInFiles(dir, extensions, (content, file) -> content.replace(oldRepository, newRepository));
+      log.info("Replaced repository '{}' with '{}'", oldRepository, newRepository);
     }
 
   }
