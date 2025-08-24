@@ -16,9 +16,9 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-  name = "python",
-  description = "Initialize a new Python project",
-  mixinStandardHelpOptions = true
+    name = "python",
+    description = "Initialize a new Python project",
+    mixinStandardHelpOptions = true
 )
 public class InitPythonCommand implements Runnable {
 
@@ -36,31 +36,37 @@ public class InitPythonCommand implements Runnable {
 
   @Override
   public void run() {
-  if (debug) {
-    log.debug("Starting Python project initialization with projectName={} in dir={}", projectName, dir);
-  }
-
-  if (!dir.exists()) {
-    dir.mkdirs();
-  }
-
-  Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
-  objectMapping.put("projectName", projectName);
-
-  try {
-    templateService.renderCommonTemplates(objectMapping, dir);
-
-    File srcDir = new File(dir, "src");
-    if (!srcDir.exists()) {
-    srcDir.mkdirs();
+    if (debug) {
+      log.debug("Starting Python project initialization with projectName={} in dir={}", projectName, dir);
     }
 
-    templateService.renderTemplate("python/src/main.py.ftl", objectMapping, new File(srcDir, "main.py"));
-    templateService.renderTemplate("python/requirements.txt.ftl", objectMapping, new File(dir, "requirements.txt"));
-  } catch (IOException e) {
-    throw new RuntimeException(e);
-  }
+    if (!dir.exists()) {
+      dir.mkdirs();
+    }
 
-  log.info("Python project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
+    Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
+    objectMapping.put("projectName", projectName);
+
+    try {
+      templateService.renderCommonTemplates(objectMapping, dir);
+
+      templateService.renderTemplate("python/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+      templateService.renderTemplate("python/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      templateService.renderTemplate("python/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
+      templateService.renderTemplate("python/requirements.txt.ftl", objectMapping, new File(dir, "requirements.txt"));
+      templateService.renderTemplate("python/pyproject.toml.ftl", objectMapping, new File(dir, "pyproject.toml"));
+
+      File srcDir = new File(dir, "src");
+      if (!srcDir.exists()) {
+        srcDir.mkdirs();
+      }
+
+      templateService.renderTemplate("python/src/main.py.ftl", objectMapping, new File(srcDir, "main.py"));
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    log.info("Python project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
   }
 }
