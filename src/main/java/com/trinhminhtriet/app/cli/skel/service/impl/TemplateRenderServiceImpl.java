@@ -45,10 +45,12 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
   @Override
   public void renderCommonTemplates(Map<String, Object> data, File targetDir) throws IOException {
     String[][] templates = {
-        {"common/CONTRIBUTING.md.ftl", "CONTRIBUTING.md"},
-        {"common/LICENSE.ftl", "LICENSE"},
+        {"common/README.md.ftl", "README.md"},
         {"common/CHANGELOG.md.ftl", "CHANGELOG.md"},
-        {"common/README.md.ftl", "README.md"}
+        {"common/CONTRIBUTING.md.ftl", "CONTRIBUTING.md"},
+        {"common/CODE_OF_CONDUCT.md.ftl", "CODE_OF_CONDUCT.md"},
+        {"common/SECURITY.md.ftl", "SECURITY.md"},
+        {"common/LICENSE.ftl", "LICENSE"}
     };
     for (String[] tpl : templates) {
       File outFile = new File(targetDir, tpl[1]);
