@@ -2,6 +2,7 @@ package com.trinhminhtriet.app.cli.skel.command;
 
 import com.moandjiezana.toml.Toml;
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
+import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import com.trinhminhtriet.app.cli.skel.service.TomlService;
 import java.io.File;
 import java.io.IOException;
@@ -22,12 +23,13 @@ import picocli.CommandLine.Option;
     description = "Refactor Rust project source code",
     mixinStandardHelpOptions = true
 )
-public class RefactorRustCommand implements Runnable {
+public class RefactorRustCommand extends AbstractRustCommand implements Runnable {
 
   @Option(names = {"--dir"}, required = true, description = "Target Rust project directory")
   private File dir;
   private final ConfigService configService;
   private final TomlService tomlService;
+  private final TemplateRenderService templateService;
 
   @Override
   public void run() {
@@ -40,6 +42,11 @@ public class RefactorRustCommand implements Runnable {
 
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
 
+      String projectName = dir.getName();
+      objectMapping.put("projectName", projectName);
+
+      renderTemplate(templateService, objectMapping, dir);
+
       File cargoToml = new File(dir, "Cargo.toml");
       if (!cargoToml.exists()) {
         log.warn("Cargo.toml not found in directory: {}", dir.getCanonicalPath());
@@ -48,11 +55,11 @@ public class RefactorRustCommand implements Runnable {
 
       overrideCargoToml(cargoToml);
 
-
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
   }
+
 
   private void overrideCargoToml(File cargoToml) throws IOException {
     Toml toml = new Toml().read(cargoToml);

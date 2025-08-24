@@ -20,7 +20,7 @@ import picocli.CommandLine.Option;
     description = "Initialize a new Rust project",
     mixinStandardHelpOptions = true
 )
-public class InitRustCommand implements Runnable {
+public class InitRustCommand extends AbstractRustCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;
@@ -47,14 +47,7 @@ public class InitRustCommand implements Runnable {
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
       objectMapping.put("projectName", projectName);
 
-      templateService.renderCommonTemplates(objectMapping, dir);
-      templateService.renderTemplate("rust/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
-      templateService.renderTemplate("rust/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
-      templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-      templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
-      templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
-      templateService.renderTemplate("rust/clippy.toml.ftl", objectMapping, new File(dir, "clippy.toml"));
-      templateService.renderTemplate("rust/Cargo.toml.ftl", objectMapping, new File(dir, "Cargo.toml"));
+      renderTemplate(templateService, objectMapping, dir);
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
@@ -68,6 +61,4 @@ public class InitRustCommand implements Runnable {
       log.error("Error initializing Rust project", e);
     }
   }
-
-
 }
