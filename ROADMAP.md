@@ -6,9 +6,9 @@ The **Scaffolder CLI** project aims to evolve from a simple project initializer 
 
 ## 🚀 Phase 1 – MVP (Minimum Viable Product)
 
+* [ ] Generate **README.md** and **LICENSE** (MIT, Apache 2.0, GPL)
 * [ ] Support basic multi-language scaffolding: **Rust**, **Go**, **Python**
 * [ ] **Config profiles** (`~/.skel/config.yml`) for author, email, default license
-* [ ] Generate **README.md** and **LICENSE** (MIT, Apache 2.0, GPL)
 * [ ] Auto `git init` + initial commit
 
 👉 **Goal**: Quickly create a ready-to-use project with a standard structure.
