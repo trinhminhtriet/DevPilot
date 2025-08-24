@@ -51,8 +51,10 @@ public class InitGoCommand implements Runnable {
       templateService.renderCommonTemplates(objectMapping, dir);
 
       templateService.renderTemplate("go/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+      templateService.renderTemplate("go/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
       templateService.renderTemplate("go/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
       templateService.renderTemplate("go/go.mod.ftl", objectMapping, new File(dir, "go.mod"));
+      templateService.renderTemplate("go/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
