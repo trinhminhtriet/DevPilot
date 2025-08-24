@@ -78,6 +78,11 @@
       <version>${picocli.version}</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.dataformat</groupId>
+      <artifactId>jackson-dataformat-yaml</artifactId>
+      <version>2.19.2</version>
+    </dependency>
   </dependencies>
 
   <build>
