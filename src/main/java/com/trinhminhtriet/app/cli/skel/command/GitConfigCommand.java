@@ -30,7 +30,7 @@ public class GitConfigCommand implements Runnable {
   public void run() {
     try {
       if (authorName == null || authorName.isEmpty()) {
-        authorName = configService.getValue("user.value");
+        authorName = configService.getValue("user.name");
       }
       if (authorEmail == null || authorEmail.isEmpty()) {
         authorEmail = configService.getValue("user.email");
