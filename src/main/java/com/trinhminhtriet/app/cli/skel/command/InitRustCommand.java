@@ -20,7 +20,7 @@ import picocli.CommandLine.Option;
     description = "Initialize a new Rust project",
     mixinStandardHelpOptions = true
 )
-public class RustInitCommand implements Runnable {
+public class InitRustCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;

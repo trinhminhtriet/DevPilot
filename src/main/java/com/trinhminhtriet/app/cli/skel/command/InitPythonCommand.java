@@ -20,7 +20,7 @@ import picocli.CommandLine.Option;
     description = "Initialize a new Python project",
     mixinStandardHelpOptions = true
 )
-public class PythonInitCommand implements Runnable {
+public class InitPythonCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;

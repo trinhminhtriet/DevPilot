@@ -20,7 +20,7 @@ import picocli.CommandLine.Option;
     description = "Initialize a new Go project",
     mixinStandardHelpOptions = true
 )
-public class GoInitCommand implements Runnable {
+public class InitGoCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;

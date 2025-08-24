@@ -5,15 +5,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
+
 @Slf4j
 @Component
 @Command(
     name = "init",
     description = "Initialize project scaffolding",
     subcommands = {
-        RustInitCommand.class,
-        PythonInitCommand.class,
-        GoInitCommand.class
+        InitGoCommand.class,
+        InitRustCommand.class,
+        InitPythonCommand.class,
     }
 )
 @RequiredArgsConstructor
