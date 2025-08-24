@@ -49,8 +49,10 @@ public class InitRustCommand implements Runnable {
 
       templateService.renderCommonTemplates(objectMapping, dir);
       templateService.renderTemplate("rust/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+      templateService.renderTemplate("rust/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
       templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
       templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
+      templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
