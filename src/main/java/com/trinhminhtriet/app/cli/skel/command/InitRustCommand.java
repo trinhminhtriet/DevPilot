@@ -16,9 +16,9 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-  name = "rust",
-  description = "Initialize a new Rust project",
-  mixinStandardHelpOptions = true
+    name = "rust",
+    description = "Initialize a new Rust project",
+    mixinStandardHelpOptions = true
 )
 public class InitRustCommand implements Runnable {
 
@@ -39,40 +39,31 @@ public class InitRustCommand implements Runnable {
     if (debug) {
       log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
     }
-
-    createDirectory(dir);
-
-    Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
-    objectMapping.put("projectName", projectName);
-
-    renderTemplate(() -> templateService.renderCommonTemplates(objectMapping, dir));
-    renderTemplate(() -> templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig")));
-    renderTemplate(() -> templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile")));
-
-    File srcDir = new File(dir, "src");
-    createDirectory(srcDir);
-
-    renderTemplate(() -> templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs")));
-
-    log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
-  }
-
-  private void createDirectory(File directory) {
-    if (!directory.exists() && !directory.mkdirs()) {
-      throw new RuntimeException();
-    }
-  }
-
-  private void renderTemplate(RenderAction action) {
     try {
-      action.run();
+      if (!dir.exists()) {
+        dir.mkdirs();
+      }
+
+      Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
+      objectMapping.put("projectName", projectName);
+
+      templateService.renderCommonTemplates(objectMapping, dir);
+      templateService.renderTemplate("rust/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+      templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+      templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
+
+      File srcDir = new File(dir, "src");
+      if (!srcDir.exists()) {
+        srcDir.mkdirs();
+      }
+
+      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main"));
+
+      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getAbsolutePath());
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      log.error("Error initializing Rust project", e);
     }
   }
 
-  @FunctionalInterface
-  private interface RenderAction {
-    void run() throws IOException;
-  }
+
 }

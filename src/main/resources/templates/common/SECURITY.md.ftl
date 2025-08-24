@@ -2,7 +2,8 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in this project, please report it privately to the maintainer at ${authorEmail}.
+If you discover a security vulnerability in this project, please report it privately to the
+maintainer at ${user.email}.
 
 Do **not** create public issues for security problems.
 

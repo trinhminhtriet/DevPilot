@@ -16,9 +16,9 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-  name = "go",
-  description = "Initialize a new Go project",
-  mixinStandardHelpOptions = true
+    name = "go",
+    description = "Initialize a new Go project",
+    mixinStandardHelpOptions = true
 )
 public class InitGoCommand implements Runnable {
 
@@ -40,19 +40,19 @@ public class InitGoCommand implements Runnable {
       log.debug("Starting Go project initialization with name={} in dir={}", projectName, dir);
     }
 
-    if (!dir.exists()) {
-      dir.mkdirs();
-    }
-
-    Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
-    objectMapping.put("projectName", projectName);
-
     try {
+      if (!dir.exists()) {
+        dir.mkdirs();
+      }
+
+      Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
+      objectMapping.put("projectName", projectName);
+
       templateService.renderCommonTemplates(objectMapping, dir);
 
+      templateService.renderTemplate("go/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
       templateService.renderTemplate("go/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
       templateService.renderTemplate("go/go.mod.ftl", objectMapping, new File(dir, "go.mod"));
-      templateService.renderTemplate("go/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
