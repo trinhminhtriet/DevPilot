@@ -16,4 +16,4 @@ We will investigate all reports and do our best to fix vulnerabilities quickly. 
 
 ## Contact
 
-- Maintainer: ${author.name} <${author.email}>
+- Maintainer: ${user.name} <${user.email}>

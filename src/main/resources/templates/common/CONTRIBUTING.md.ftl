@@ -23,4 +23,4 @@ Please be respectful and constructive in all interactions.
 
 ## Contact
 
-If you have any questions, feel free to open an issue or contact the maintainer: ${author.name} <${author.email}>
+If you have any questions, feel free to open an issue or contact the maintainer: ${user.name} <${user.email}>
