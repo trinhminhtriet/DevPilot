@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -55,8 +56,6 @@ public class RefactorRustCommand implements Runnable {
 
   private void overrideCargoToml(File cargoToml) throws IOException {
     Toml toml = new Toml().read(cargoToml);
-
-    var packageTable = toml.getTable("package");
     var authors = toml.getList("package.authors");
     log.info("Original package.authors={}", authors);
     String oldAuthorName = "";
@@ -74,32 +73,47 @@ public class RefactorRustCommand implements Runnable {
 
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
     Map<String, Object> newAuthor = (HashMap<String, Object>) objectMapping.get("user");
-    String newAuthorName = (String) newAuthor.get("name");
-    String newAuthorEmail = (String) newAuthor.get("email");
 
+    String[] extensions = {".rs", ".yml", ".yaml", ".toml", ".md", ".txt"};
+
+    if (!oldAuthorName.isEmpty()) {
+      String finalOldAuthorName = oldAuthorName;
+      String newAuthorName = (String) newAuthor.get("name");
+      replaceInFiles(dir, extensions, (content, file) -> content.replace(finalOldAuthorName, newAuthorName));
+      log.info("Replaced author name '{}' with '{}'", finalOldAuthorName, newAuthorName);
+    }
+
+    if (!oldAuthorEmail.isEmpty()) {
+      String finalOldAuthorEmail = oldAuthorEmail;
+      String newAuthorEmail = (String) newAuthor.get("email");
+      replaceInFiles(dir, extensions, (content, file) -> content.replace(finalOldAuthorEmail, newAuthorEmail));
+      log.info("Replaced author email '{}' with '{}'", finalOldAuthorEmail, newAuthorEmail);
+    }
+
+  }
+
+  private void replaceInFiles(File dir, String[] extensions, BiFunction<String, File, String> replacer) throws IOException {
     File[] files = dir.listFiles((d, name) -> {
       File f = new File(d, name);
-      return f.isFile() && (
-          name.endsWith(".rs") ||
-              name.endsWith(".yml") ||
-              name.endsWith(".yaml") ||
-              name.endsWith(".toml") ||
-              name.endsWith(".md") ||
-              name.endsWith(".txt"));
+      if (!f.isFile()) {
+        return false;
+      }
+      for (String ext : extensions) {
+        if (name.endsWith(ext)) {
+          return true;
+        }
+      }
+      return false;
     });
-    log.info("Files to process in {}: {}", dir.getCanonicalPath(), files != null ? files.length : 0);
     if (files != null) {
       for (File file : files) {
         String content = java.nio.file.Files.readString(file.toPath());
-        content = content.replace(oldAuthorName, newAuthorName)
-            .replace(oldAuthorEmail, newAuthorEmail);
-        java.nio.file.Files.writeString(file.toPath(), content);
-        log.info("Updated author info in file: {}", file.getName());
+        String newContent = replacer.apply(content, file);
+        if (!content.equals(newContent)) {
+          java.nio.file.Files.writeString(file.toPath(), newContent);
+          log.info("Updated file: {}", file.getName());
+        }
       }
-    }
-
-    if (packageTable == null) {
-      log.warn("No [package] section found in Cargo.toml");
     }
   }
 
