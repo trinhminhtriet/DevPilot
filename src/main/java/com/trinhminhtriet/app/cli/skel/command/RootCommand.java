@@ -18,6 +18,7 @@ import picocli.CommandLine.Command;
         InitCommand.class,
         ListCommand.class,
         VersionCommand.class,
+        AutoCompletionCommand.class
     }
 )
 public class RootCommand implements Runnable {
