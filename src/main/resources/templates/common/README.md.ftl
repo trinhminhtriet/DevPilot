@@ -1,7 +1,7 @@
 # ${projectName}
 
 ```text
-
+${projectNameFiglet}
 ```
 
 ## ✨ Features
