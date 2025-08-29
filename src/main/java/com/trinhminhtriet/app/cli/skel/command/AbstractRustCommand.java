@@ -13,6 +13,8 @@ public abstract class AbstractRustCommand {
     String projectName = objectMapping.get("projectName").toString();
     String projectNameFiglet = FigletFont.convertOneLine(projectName);
 
+    System.out.println(projectNameFiglet);
+
     objectMapping.put("projectNameFiglet", projectNameFiglet);
 
     templateService.renderCommonTemplates(objectMapping, dir);
