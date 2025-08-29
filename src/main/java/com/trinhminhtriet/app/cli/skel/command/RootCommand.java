@@ -17,6 +17,7 @@ import picocli.CommandLine.Command;
         AddCommand.class,
         InitCommand.class,
         ListCommand.class,
+        FigletCommand.class,
         VersionCommand.class,
         AutoCompletionCommand.class
     }
