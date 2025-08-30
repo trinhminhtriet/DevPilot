@@ -1,5 +1,6 @@
 package com.trinhminhtriet.app.cli.skel.service.impl;
 
+import com.github.lalyos.jfiglet.FigletFont;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -43,7 +44,14 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
   }
 
   @Override
-  public void renderCommonTemplates(Map<String, Object> data, File targetDir) throws IOException {
+  public void renderCommonTemplates(Map<String, Object> objectMapping, File targetDir) throws IOException {
+    String projectName = objectMapping.get("projectName").toString();
+    String projectNameFiglet = FigletFont.convertOneLine(projectName);
+
+    System.out.println(projectNameFiglet);
+
+    objectMapping.put("projectNameFiglet", projectNameFiglet);
+
     String[][] templates = {
         {"common/README.md.ftl", "README.md"},
         {"common/CHANGELOG.md.ftl", "CHANGELOG.md"},
@@ -54,7 +62,7 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
     };
     for (String[] tpl : templates) {
       File outFile = new File(targetDir, tpl[1]);
-      renderTemplate(tpl[0], data, outFile);
+      renderTemplate(tpl[0], objectMapping, outFile);
     }
   }
 }

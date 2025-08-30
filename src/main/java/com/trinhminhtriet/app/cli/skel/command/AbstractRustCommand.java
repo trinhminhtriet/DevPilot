@@ -1,6 +1,5 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
-import com.github.lalyos.jfiglet.FigletFont;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import java.io.File;
 import java.io.IOException;
@@ -9,13 +8,6 @@ import java.util.Map;
 public abstract class AbstractRustCommand {
 
   protected void renderTemplate(TemplateRenderService templateService, Map<String, Object> objectMapping, File dir) throws IOException {
-
-    String projectName = objectMapping.get("projectName").toString();
-    String projectNameFiglet = FigletFont.convertOneLine(projectName);
-
-    System.out.println(projectNameFiglet);
-
-    objectMapping.put("projectNameFiglet", projectNameFiglet);
 
     templateService.renderCommonTemplates(objectMapping, dir);
 

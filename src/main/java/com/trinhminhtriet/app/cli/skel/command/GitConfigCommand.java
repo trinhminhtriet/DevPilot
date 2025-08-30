@@ -2,8 +2,6 @@ package com.trinhminhtriet.app.cli.skel.command;
 
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -38,14 +36,14 @@ public class GitConfigCommand implements Runnable {
 
       if (authorName != null && !authorName.isEmpty()) {
         new ProcessBuilder("git", "config", "user.name", authorName).directory(dir).start().waitFor();
-        log.info("Set git user.name to {}", authorName);
+        log.info("✅ git config user.name to {}", authorName);
       }
       if (authorEmail != null && !authorEmail.isEmpty()) {
         new ProcessBuilder("git", "config", "user.email", authorEmail).directory(dir).start().waitFor();
-        log.info("Set git user.email to {}", authorEmail);
+        log.info("✅ git config user.email to {}", authorEmail);
       }
     } catch (Exception e) {
-      log.error("Failed to set git config: {}", e.getMessage());
+      log.error("❌ Failed to set git config: {}", e.getMessage());
     }
   }
 }
