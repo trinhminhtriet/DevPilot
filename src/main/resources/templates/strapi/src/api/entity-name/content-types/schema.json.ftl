@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "github_users",
+  "collectionName": "${collectionName}",
   "info": {
-    "singularName": "${entityName}",
-    "pluralName": "${entityName}s",
-    "displayName": "Github User"
+    "singularName": "${singularName}",
+    "pluralName": "${pluralName}",
+    "displayName": "${displayName}"
   },
   "options": {
     "draftAndPublish": true
