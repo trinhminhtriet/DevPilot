@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.text.WordUtils;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -44,7 +45,7 @@ public class StrapiEntityCommand implements Runnable {
       objectMapping.put("collectionName", entityName.replaceAll("-", "_"));
       objectMapping.put("singularName", entityName);
       objectMapping.put("pluralName", entityName + "s");
-      objectMapping.put("displayName", entityName.replaceAll("-", " ").toUpperCase().charAt(0) + entityName.replaceAll("-", " ").substring(1));
+      objectMapping.put("displayName", WordUtils.capitalizeFully((entityName.replaceAll("-", " "))));
 
       log.info("Generating Strapi entity {} in dir={}", entityName, dir);
 

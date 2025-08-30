@@ -36,6 +36,7 @@
     <picocli.version>4.7.7</picocli.version>
     <toml4j.version>0.7.2</toml4j.version>
     <jfiglet.version>0.0.9</jfiglet.version>
+    <apache.commons.version>3.18.0</apache.commons.version>
   </properties>
   <dependencies>
     <dependency>
@@ -98,6 +99,13 @@
       <artifactId>jfiglet</artifactId>
       <version>${jfiglet.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${apache.commons.version}</version>
+    </dependency>
+
   </dependencies>
 
   <build>
