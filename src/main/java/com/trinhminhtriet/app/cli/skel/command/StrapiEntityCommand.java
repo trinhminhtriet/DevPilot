@@ -44,7 +44,7 @@ public class StrapiEntityCommand implements Runnable {
       objectMapping.put("collectionName", entityName.replaceAll("-", "_"));
       objectMapping.put("singularName", entityName);
       objectMapping.put("pluralName", entityName + "s");
-      objectMapping.put("displayName", entityName.replaceAll("-", " ").toUpperCase());
+      objectMapping.put("displayName", entityName.replaceAll("-", " ").toUpperCase().charAt(0) + entityName.replaceAll("-", " ").substring(1));
 
       log.info("Generating Strapi entity {} in dir={}", entityName, dir);
 
