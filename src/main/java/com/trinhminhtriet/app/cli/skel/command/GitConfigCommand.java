@@ -11,7 +11,11 @@ import picocli.CommandLine.Option;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Command(name = "config", description = "Set git user.name and user.email in the target directory", mixinStandardHelpOptions = true)
+@Command(
+    name = "config",
+    description = "Set git user.name and user.email in the target directory",
+    mixinStandardHelpOptions = true
+)
 public class GitConfigCommand implements Runnable {
 
   @Option(names = {"--dir"}, description = "Target directory", defaultValue = ".")
