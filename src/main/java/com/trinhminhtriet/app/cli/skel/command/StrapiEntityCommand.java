@@ -34,8 +34,9 @@ public class StrapiEntityCommand implements Runnable {
   @Override
   public void run() {
     try {
-      if (!dir.exists()) {
-        dir.mkdirs();
+      if (!dir.exists() && !dir.mkdirs()) {
+        log.error("Failed to create target directory: {}", dir);
+        return;
       }
 
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
@@ -43,38 +44,23 @@ public class StrapiEntityCommand implements Runnable {
 
       log.info("Generating Strapi entity {} in dir={}", entityName, dir);
 
-      File contentTypesDir = new File(dir, "src/api/" + entityName + "/content-types");
-      if (!contentTypesDir.exists()) {
-        contentTypesDir.mkdirs();
-      }
-      templateService.renderTemplate("strapi/src/api/entity-name/content-types/schema.json.ftl", objectMapping, new File(contentTypesDir, "schema.json"));
-
-      File controllersDir = new File(dir, "src/api/" + entityName + "/controllers");
-      if (!controllersDir.exists()) {
-        controllersDir.mkdirs();
-      }
-      templateService.renderTemplate(
-          "strapi/src/api/entity-name/controllers/entity-name.ts.ftl",
-          objectMapping, new File(controllersDir, entityName + ".ts"));
-
-      File routesDir = new File(dir, "src/api/" + entityName + "/routes");
-      if (!routesDir.exists()) {
-        routesDir.mkdirs();
-      }
-      templateService.renderTemplate(
-          "strapi/src/api/entity-name/routes/entity-name.ts.ftl",
-          objectMapping, new File(routesDir, entityName + ".ts"));
-
-      File servicesDir = new File(dir, "src/api/" + entityName + "/services");
-      if (!servicesDir.exists()) {
-        servicesDir.mkdirs();
-      }
-      templateService.renderTemplate(
-          "strapi/src/api/entity-name/services/entity-name.ts.ftl",
-          objectMapping, new File(servicesDir, entityName + ".ts"));
+      generatePart("content-types", "schema.json", "strapi/src/api/entity-name/content-types/schema.json.ftl", objectMapping);
+      generatePart("controllers", entityName + ".ts", "strapi/src/api/entity-name/controllers/entity-name.ts.ftl", objectMapping);
+      generatePart("routes", entityName + ".ts", "strapi/src/api/entity-name/routes/entity-name.ts.ftl", objectMapping);
+      generatePart("services", entityName + ".ts", "strapi/src/api/entity-name/services/entity-name.ts.ftl", objectMapping);
 
     } catch (IOException e) {
       log.error("Error generating Strapi entity {} -> {}", entityName, dir, e);
     }
+  }
+
+  private void generatePart(String part, String targetFileName, String template, Map<String, Object> objectMapping) throws IOException {
+    File partDir = new File(dir, "src/api/" + entityName + "/" + part);
+    if (!partDir.exists() && !partDir.mkdirs()) {
+      log.error("Failed to create directory: {}", partDir);
+      return;
+    }
+    File targetFile = new File(partDir, targetFileName);
+    templateService.renderTemplate(template, objectMapping, targetFile);
   }
 }
