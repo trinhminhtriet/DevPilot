@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class ConfigServiceImpl implements ConfigService {
 
   private static final String CONFIG_PATH = System.getProperty("user.home") + "/.devpilot/config.yml";
+  private static final String TEMPLATE_CONFIG_PATH = "src/main/resources/templates/config.yml";
 
   @Override
   public Map<String, Object> loadConfig() {
@@ -35,6 +36,25 @@ public class ConfigServiceImpl implements ConfigService {
       }
     }
     return config;
+  }
+
+  @Override
+  public void initConfig() {
+    File configFile = new File(CONFIG_PATH);
+    if (!configFile.exists()) {
+      File templateFile = new File(TEMPLATE_CONFIG_PATH);
+      configFile.getParentFile().mkdirs();
+      try (FileInputStream fis = new FileInputStream(templateFile);
+           FileOutputStream fos = new FileOutputStream(configFile)) {
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = fis.read(buffer)) > 0) {
+          fos.write(buffer, 0, length);
+        }
+      } catch (IOException e) {
+        throw new RuntimeException("Failed to initialize config from template", e);
+      }
+    }
   }
 
   @Override

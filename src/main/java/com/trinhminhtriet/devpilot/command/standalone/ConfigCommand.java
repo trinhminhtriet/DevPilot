@@ -3,7 +3,6 @@ package com.trinhminhtriet.devpilot.command.standalone;
 import com.trinhminhtriet.devpilot.service.ConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -25,6 +24,7 @@ public class ConfigCommand implements Runnable {
 
   @Override
   public void run() {
+    configService.initConfig();
     String configPath = configService.getConfigFilePath();
     log.info("Config file path: {}", configPath);
     if (edit) {

@@ -38,21 +38,21 @@ class TemplateRenderServiceImplTest {
     data.put("projectName", "TestProject");
     StringWriter writer = new StringWriter();
     doAnswer(invocation -> {
-      ((StringWriter) invocation.getArgument(1)).write("Rendered content");
+      ((StringWriter) invocation.getArgument(1)).write("* text=auto eol=lf");
       return null;
     }).when(template).process(eq(data), any(StringWriter.class));
 
     // Use a temp file for output
     java.io.File tempFile = java.io.File.createTempFile("test", ".md");
     tempFile.deleteOnExit();
-    service.renderTemplate("template.ftl", data, new File(tempFile.getAbsolutePath()));
+    service.renderTemplate("templates/common/.gitattributes.ftl", data, new File(tempFile.getAbsolutePath()));
     String result = new String(java.nio.file.Files.readAllBytes(tempFile.toPath()));
-    assertEquals("Rendered content", result);
+    assertEquals("* text=auto eol=lf", result);
   }
 
   @Test
   void testRenderTemplateThrowsException() throws Exception {
-    when(configuration.getTemplate(any(String.class))).thenThrow(new RuntimeException("Template not found"));
+    when(configuration.getTemplate(any(String.class))).thenThrow(new RuntimeException("Template rendering failed"));
     Map<String, Object> data = new HashMap<>();
     Exception exception = assertThrows(Exception.class, () -> {
       service.renderTemplate("bad.ftl", data, new File("output.md"));

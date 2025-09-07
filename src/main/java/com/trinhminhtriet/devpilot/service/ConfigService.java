@@ -11,6 +11,8 @@ public interface ConfigService {
    */
   Map<String, Object> loadConfig();
 
+  void initConfig();
+
   /**
    * Save config to ~/.devpilot/config.yml
    */

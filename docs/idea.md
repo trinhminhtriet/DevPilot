@@ -37,3 +37,18 @@ Here are more ideas to make DevPilot valuable for Java developers:
 - Add command to migrate from Java 8 to newer versions (API usage hints, etc.).
 
 Let me know if you want to implement any specific idea!
+
+Dưới đây là một số ý tưởng có thể bổ sung cho dự án DevPilot:
+
+1. Tích hợp AI để tự động sinh mã nguồn hoặc đề xuất sửa lỗi.
+2. Xây dựng dashboard trực quan hóa tiến độ phát triển, lỗi, và các báo cáo chất lượng mã.
+3. Hỗ trợ sinh tài liệu tự động từ mã nguồn (docstring, API docs).
+4. Tích hợp kiểm tra bảo mật tự động cho các dự án phần mềm.
+5. Phát triển plugin cho các IDE phổ biến (VS Code, IntelliJ).
+6. Tích hợp hệ thống quản lý yêu cầu (issue tracker) và tự động liên kết commit với yêu cầu.
+7. Hỗ trợ sinh các template cho nhiều ngôn ngữ/lĩnh vực mới (ví dụ: DevOps, Data Science).
+8. Tích hợp kiểm thử tự động và báo cáo coverage.
+9. Tạo công cụ phân tích lịch sử commit để dự đoán rủi ro hoặc điểm nóng trong dự án.
+10. Hỗ trợ sinh các workflow CI/CD mẫu cho nhiều nền tảng.
+
+Bạn muốn bổ sung ý tưởng nào vào tài liệu idea.md?
