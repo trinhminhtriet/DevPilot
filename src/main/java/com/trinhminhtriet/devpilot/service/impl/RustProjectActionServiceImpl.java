@@ -15,24 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class RustProjectActionServiceImpl implements ProjectActionService {
 
   private final TemplateRenderService templateService;
   private final ConfigService configService;
-  private final TomlService tomlService;
-
-  private void renderTemplate(TemplateRenderService templateService, Map<String, Object> objectMapping, File dir) throws IOException {
-
-    templateService.renderCommonTemplates(objectMapping, dir);
-    templateService.renderTemplate("rust/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
-    templateService.renderTemplate("rust/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
-    templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-    templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
-    templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
-    templateService.renderTemplate("rust/clippy.toml.ftl", objectMapping, new File(dir, "clippy.toml"));
-  }
 
   @Override
   public void scaffoldProject(String projectName, File dir, Map<String, Object> config) throws IOException {
@@ -179,5 +167,16 @@ public class RustProjectActionServiceImpl implements ProjectActionService {
         }
       }
     }
+  }
+
+  private void renderTemplate(TemplateRenderService templateService, Map<String, Object> objectMapping, File dir) throws IOException {
+
+    templateService.renderCommonTemplates(objectMapping, dir);
+    templateService.renderTemplate("rust/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
+    templateService.renderTemplate("rust/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
+    templateService.renderTemplate("rust/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
+    templateService.renderTemplate("rust/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
+    templateService.renderTemplate("rust/rustfmt.toml.ftl", objectMapping, new File(dir, "rustfmt.toml"));
+    templateService.renderTemplate("rust/clippy.toml.ftl", objectMapping, new File(dir, "clippy.toml"));
   }
 }
