@@ -9,25 +9,12 @@
     <version>3.5.5</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-  <groupId>com.trinhminhtriet.app.cli</groupId>
+  <groupId>com.trinhminhtriet.devpilot</groupId>
   <artifactId>devpilot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>devpilot</name>
   <description>🚀 All-in-one CLI toolkit for developers: scaffold, manage, automate, and boost productivity across languages!
   </description>
-  <url/>
-  <licenses>
-    <license/>
-  </licenses>
-  <developers>
-    <developer/>
-  </developers>
-  <scm>
-    <connection/>
-    <developerConnection/>
-    <tag/>
-    <url/>
-  </scm>
   <properties>
     <java.version>21</java.version>
     <spring.version>3.5.5</spring.version>
@@ -35,6 +22,7 @@
     <picocli.version>4.7.7</picocli.version>
     <toml4j.version>0.7.2</toml4j.version>
     <jfiglet.version>0.0.9</jfiglet.version>
+    <versions-maven-plugin.version>2.19.0</versions-maven-plugin.version>
     <apache.commons.version>3.18.0</apache.commons.version>
   </properties>
   <dependencies>
@@ -92,7 +80,7 @@
       <artifactId>toml4j</artifactId>
       <version>${toml4j.version}</version>
     </dependency>
-<!--    https://github.com/lalyos/jfiglet-->
+    <!--    https://github.com/lalyos/jfiglet-->
     <dependency>
       <groupId>com.github.lalyos</groupId>
       <artifactId>jfiglet</artifactId>
@@ -123,6 +111,14 @@
         <configuration>
           <source>21</source>
           <target>21</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>${versions-maven-plugin.version}</version>
+        <configuration>
+          <generateBackupPoms>false</generateBackupPoms>
         </configuration>
       </plugin>
     </plugins>
