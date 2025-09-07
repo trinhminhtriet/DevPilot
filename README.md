@@ -45,6 +45,15 @@ cd skel-cli
 mvn clean package
 ```
 
+### Install as a shortcut command (Linux/macOS)
+
+```shell
+# Copy JAR and create shortcut script in $HOME/.local/bin
+./install.sh
+# Make sure $HOME/.local/bin is in your PATH
+export PATH="$HOME/.local/bin:$PATH"
+```
+
 ## 💡 Usage
 
 ### Run help
@@ -78,14 +87,7 @@ java -jar target/skel-0.0.1-SNAPSHOT.jar init go --name MyGoApp --dir ./MyGoApp
 java -jar target/skel-0.0.1-SNAPSHOT.jar init python --name MyPythonApp --dir ./MyPythonApp
 ```
 
-### Install as a shortcut command (Linux/macOS)
 
-```shell
-# Copy JAR and create shortcut script in $HOME/.local/bin
-bash install.sh
-# Make sure $HOME/.local/bin is in your PATH
-export PATH="$HOME/.local/bin:$PATH"
-```
 
 Now you can use:
 
