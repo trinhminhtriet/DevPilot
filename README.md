@@ -1,10 +1,17 @@
-# Skel CLI
+# DevPilot
+
+```
+  ____             ____  _ _       _   
+ |  _ \  _____   _|  _ \(_) | ___ | |_
+ | | | |/ _ \ \ / / |_) | | |/ _ \| __|
+ | |_| |  __/\ V /|  __/| | | (_) | |_
+ |____/ \___| \_/ |_|   |_|_|\___/ \__|
+```
 
 ## Intro
 
-**Skel CLI** is a command-line tool built with **Spring Boot**, **Picocli**, and **Freemarker**.  
-It helps developers quickly generate project scaffolding for multiple languages such as **Rust**, *
-*Golang**, **Python**, and **TypeScript**, including essential files like `README.md`, `LICENSE`,
+**DevPilot** is a command-line tool built with **Spring Boot**, **Picocli**, and **Freemarker**.  
+It helps developers quickly generate project scaffolding for multiple languages such as **Rust**, **Golang**, **Python**, and **TypeScript**, including essential files like `README.md`, `LICENSE`,
 `.gitignore`, `.editorconfig`, `.vscode/settings.json`, and `CHANGELOG.md`.
 
 The goal of this project is to provide a unified, extensible CLI tool for initializing projects with
@@ -59,35 +66,8 @@ export PATH="$HOME/.local/bin:$PATH"
 ### Run help
 
 ```shell
-java -jar target/skel-0.0.1-SNAPSHOT.jar --help
+skel --help
 ```
-
-### Check version
-
-```shell
-
-java -jar target/skel-0.0.1-SNAPSHOT.jar version
-```
-
-### Generate Rust project
-
-```shell
-java -jar target/skel-0.0.1-SNAPSHOT.jar init rust --name MyRustApp --dir ../MyRustApp
-```
-
-### Generate Go project
-
-```shell
-java -jar target/skel-0.0.1-SNAPSHOT.jar init go --name MyGoApp --dir ./MyGoApp
-```
-
-### Generate Python project
-
-```shell
-java -jar target/skel-0.0.1-SNAPSHOT.jar init python --name MyPythonApp --dir ./MyPythonApp
-```
-
-
 
 Now you can use:
 
