@@ -27,6 +27,7 @@ public class FileReadmeCommand implements Runnable {
   @Override
   public void run() {
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
+    objectMapping.put("projectName", dir.getName());
     try {
       templateService.renderTemplate("common/README.md.ftl", objectMapping, new File(dir, "README.md"));
       log.info("README.md added to {}", dir.getAbsolutePath());
