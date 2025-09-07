@@ -32,4 +32,10 @@ public class TypescriptProjectActionServiceImpl implements ProjectActionService 
     }
     templateService.renderTemplate("typescript/src/index.ts.ftl", config, new File(srcDir, "index.ts"));
   }
+
+  @Override
+  public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
+    System.out.printf("[TypeScript] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    // TODO: Add logic for refactoring TypeScript project
+  }
 }

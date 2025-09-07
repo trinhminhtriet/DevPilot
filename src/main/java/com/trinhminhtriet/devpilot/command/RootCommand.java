@@ -23,7 +23,6 @@ import picocli.CommandLine.Command;
         StrapiCommand.class,
         GitCommand.class,
         FileCommand.class,
-        RefactorCommand.class,
         InitCommand.class,
         ListCommand.class,
         FigletCommand.class,

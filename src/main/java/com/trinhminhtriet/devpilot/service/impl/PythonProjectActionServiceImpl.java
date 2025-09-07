@@ -31,4 +31,10 @@ public class PythonProjectActionServiceImpl implements ProjectActionService {
     }
     templateService.renderTemplate("python/src/main.py.ftl", config, new File(srcDir, "main.py"));
   }
+
+  @Override
+  public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
+    System.out.printf("[Python] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    // TODO: Add logic for refactoring Python project
+  }
 }

@@ -31,4 +31,10 @@ public class GoProjectActionServiceImpl implements ProjectActionService {
     }
     templateService.renderTemplate("go/src/main.go.ftl", config, new File(srcDir, "main.go"));
   }
+
+  @Override
+  public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
+    System.out.printf("[Go] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    // TODO: Add logic for refactoring Go project
+  }
 }
