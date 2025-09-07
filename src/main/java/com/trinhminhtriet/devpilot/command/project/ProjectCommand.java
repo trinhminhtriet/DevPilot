@@ -1,6 +1,8 @@
 package com.trinhminhtriet.devpilot.command.project;
 
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine.Command;
 
 @Component
@@ -13,9 +15,10 @@ import picocli.CommandLine.Command;
         // Add more subcommands here: ProjectInfoCommand.class, ProjectCleanCommand.class, ...
     }
 )
+@Slf4j
 public class ProjectCommand implements Runnable {
     @Override
     public void run() {
-        System.out.println("Use subcommands: init, info, clean, release, ...");
+        log.info("Use subcommands: init, info, clean, release, ...");
     }
 }

@@ -48,7 +48,7 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
     String projectName = objectMapping.get("projectName").toString();
     String projectNameFiglet = FigletFont.convertOneLine(projectName);
 
-    System.out.println(projectNameFiglet);
+    log.info(projectNameFiglet);
 
     objectMapping.put("projectNameFiglet", projectNameFiglet);
 

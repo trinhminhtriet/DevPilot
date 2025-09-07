@@ -6,6 +6,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -13,6 +15,7 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(name = "init", description = "Initialize a new project", mixinStandardHelpOptions = true)
+@Slf4j
 public class ProjectInitCommand implements Runnable {
 
   @Option(names = "--lang", description = "Project language (rust, go, python, typescript)", required = true)
@@ -38,7 +41,7 @@ public class ProjectInitCommand implements Runnable {
       System.err.printf("Unsupported language: %s%n", lang);
       return;
     }
-    System.out.printf("[%s] Initializing project: %s%n", lang, name);
+    log.info("[%s] Initializing project: %s%n", lang, name);
     try {
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
       objectMapping.put("projectName", name);

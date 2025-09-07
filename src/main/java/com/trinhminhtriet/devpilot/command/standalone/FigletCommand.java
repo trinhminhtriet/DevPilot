@@ -2,11 +2,13 @@ package com.trinhminhtriet.devpilot.command.standalone;
 
 import com.github.lalyos.jfiglet.FigletFont;
 import java.io.IOException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
 
 @Component
+@Slf4j
 @Command(
     name = "figlet",
     description = "Prints Figlet text for the given input",
@@ -25,6 +27,6 @@ public class FigletCommand implements Runnable {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    System.out.println(figletText);
+    log.info(figletText);
   }
 }

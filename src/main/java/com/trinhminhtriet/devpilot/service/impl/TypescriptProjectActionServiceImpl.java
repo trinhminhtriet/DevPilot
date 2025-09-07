@@ -6,10 +6,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TypescriptProjectActionServiceImpl implements ProjectActionService {
 
   private final TemplateRenderService templateService;
@@ -35,7 +37,7 @@ public class TypescriptProjectActionServiceImpl implements ProjectActionService 
 
   @Override
   public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
-    System.out.printf("[TypeScript] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    log.info("[TypeScript] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
     // TODO: Add logic for refactoring TypeScript project
   }
 }

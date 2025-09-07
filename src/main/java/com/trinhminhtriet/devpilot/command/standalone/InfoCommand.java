@@ -33,10 +33,10 @@ public class InfoCommand implements Runnable {
 
         String license = config.getOrDefault("license", "").toString();
         String version = config.getOrDefault("version", "0.1.0").toString();
-        System.out.println("Project: " + projectName);
-        System.out.println("Version: " + version);
-        System.out.println("Author: " + author);
-        System.out.println("License: " + license);
-        System.out.println("Directory: " + dir.getAbsolutePath());
+        log.info("Project: " + projectName);
+        log.info("Version: " + version);
+        log.info("Author: " + author);
+        log.info("License: " + license);
+        log.info("Directory: " + dir.getAbsolutePath());
     }
 }

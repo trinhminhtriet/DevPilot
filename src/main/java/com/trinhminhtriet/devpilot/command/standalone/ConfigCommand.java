@@ -2,6 +2,8 @@ package com.trinhminhtriet.devpilot.command.standalone;
 
 import com.trinhminhtriet.devpilot.service.ConfigService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -13,6 +15,7 @@ import picocli.CommandLine.Option;
     description = "Manage user config (author, email, license, etc)",
     mixinStandardHelpOptions = true
 )
+@Slf4j
 public class ConfigCommand implements Runnable {
 
   private final ConfigService configService;
@@ -23,7 +26,7 @@ public class ConfigCommand implements Runnable {
   @Override
   public void run() {
     String configPath = configService.getConfigFilePath();
-    System.out.println("Config file path: " + configPath);
+    log.info("Config file path: " + configPath);
     if (edit) {
       try {
         String os = System.getProperty("os.name").toLowerCase();

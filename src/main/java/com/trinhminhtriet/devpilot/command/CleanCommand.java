@@ -1,8 +1,10 @@
 package com.trinhminhtriet.devpilot.command;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 
+@Slf4j
 @Component
 @Command(name = "clean", description = "Clean build, cache, logs, temp files", mixinStandardHelpOptions = true)
 public class CleanCommand implements Runnable {
@@ -17,12 +19,12 @@ public class CleanCommand implements Runnable {
             java.io.File f = new java.io.File(name);
             if (f.exists()) {
                 deleteRecursively(f);
-                System.out.println("Removed: " + f.getPath());
+                log.info("Removed: " + f.getPath());
                 removed++;
             }
         }
         if (removed == 0) {
-            System.out.println("No build/cache/log/temp files found to clean.");
+            log.info("No build/cache/log/temp files found to clean.");
         }
     }
 

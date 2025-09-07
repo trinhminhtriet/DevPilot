@@ -54,7 +54,7 @@ public class RustProjectActionServiceImpl implements ProjectActionService {
 
   @Override
   public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
-    System.out.printf("[Rust] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    log.info("[Rust] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
     // Example: update author, license, repository, homepage in all relevant files
     if (!dir.exists()) {
       System.err.println("Project directory does not exist: " + dir.getAbsolutePath());
