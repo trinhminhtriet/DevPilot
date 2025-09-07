@@ -1,6 +1,7 @@
 package com.trinhminhtriet.devpilot.command;
 
 import com.trinhminhtriet.devpilot.command.common.ListCommand;
+import com.trinhminhtriet.devpilot.command.scan.ScanCommand;
 import com.trinhminhtriet.devpilot.command.standalone.ConfigCommand;
 import com.trinhminhtriet.devpilot.command.standalone.FigletCommand;
 import com.trinhminhtriet.devpilot.command.standalone.VersionCommand;
@@ -27,6 +28,7 @@ import picocli.CommandLine.Command;
         FigletCommand.class,
         VersionCommand.class,
         ConfigCommand.class,
+        ScanCommand.class,
         ProjectCommand.class,
         AutoCompletionCommand.class
     }
