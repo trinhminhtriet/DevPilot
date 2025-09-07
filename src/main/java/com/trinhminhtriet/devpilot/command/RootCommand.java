@@ -6,6 +6,8 @@ import com.trinhminhtriet.devpilot.command.standalone.FigletCommand;
 import com.trinhminhtriet.devpilot.command.standalone.VersionCommand;
 import com.trinhminhtriet.devpilot.command.file.FileCommand;
 import com.trinhminhtriet.devpilot.command.git.GitCommand;
+import com.trinhminhtriet.devpilot.command.project.ProjectCommand;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
@@ -27,6 +29,7 @@ import picocli.CommandLine.Command;
         FigletCommand.class,
         VersionCommand.class,
         ConfigCommand.class,
+        ProjectCommand.class,
         AutoCompletionCommand.class
     }
 )

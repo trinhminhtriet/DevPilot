@@ -30,11 +30,11 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
   }
 
   @Override
-  public void renderTemplate(String templatePath, Map<String, Object> data, File outputFile) throws IOException {
+  public void renderTemplate(String templatePath, Map<String, Object> dataMapping, File outputFile) throws IOException {
     try {
       Template template = freemarkerConfig.getTemplate(templatePath);
       try (FileWriter writer = new FileWriter(outputFile)) {
-        template.process(data, writer);
+        template.process(dataMapping, writer);
       }
       log.info("✅ Generated file: {}", outputFile);
     } catch (Exception e) {
