@@ -66,4 +66,15 @@ public class ConfigServiceImpl implements ConfigService {
     }
     return current != null ? current.toString() : null;
   }
+
+  @Override
+  public String getConfigFilePath() {
+    String path = new File(CONFIG_PATH).getAbsolutePath();
+    if (File.separatorChar == '\\') { // Windows
+      path = path.replace("/", "\\");
+    } else { // Unix/Linux/Mac
+      path = path.replace("\\", "/");
+    }
+    return path;
+  }
 }

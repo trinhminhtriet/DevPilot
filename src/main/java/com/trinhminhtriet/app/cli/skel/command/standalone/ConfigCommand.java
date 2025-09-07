@@ -8,22 +8,19 @@ import picocli.CommandLine.Option;
 
 @RequiredArgsConstructor
 @Component
-@Command(name = "config", description = "Manage user config (author, email, license, etc)", mixinStandardHelpOptions = true)
+@Command(
+    name = "config",
+    description = "Manage user config (author, email, license, etc)",
+    mixinStandardHelpOptions = true
+)
 public class ConfigCommand implements Runnable {
-
-  @Option(names = {"--set"}, description = "Set config key=value, e.g. --set author.name=YourName", split = ",")
-  private String[] setValues;
-
-  @Option(names = {"--show"}, description = "Show current config", defaultValue = "false")
-  private boolean show;
 
   private final ConfigService configService;
 
   @Override
   public void run() {
 
-    if (show || (setValues == null || setValues.length == 0)) {
-      System.out.println("Current config:");
-    }
+    String configPath = configService.getConfigFilePath();
+    System.out.println("Config file path: " + configPath);
   }
 }

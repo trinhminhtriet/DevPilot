@@ -21,4 +21,10 @@ public interface ConfigService {
    * Get flatten value by key (e.g. "user.name") from config
    */
   String getValue(String key);
+
+  /**
+   * Get the absolute path to the config file (e.g. ~/.skel/config.yml)
+   */
+  String getConfigFilePath();
+
 }

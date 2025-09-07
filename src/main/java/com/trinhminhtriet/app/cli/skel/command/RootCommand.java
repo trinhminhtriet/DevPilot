@@ -1,6 +1,7 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
 import com.trinhminhtriet.app.cli.skel.command.common.ListCommand;
+import com.trinhminhtriet.app.cli.skel.command.standalone.ConfigCommand;
 import com.trinhminhtriet.app.cli.skel.command.standalone.FigletCommand;
 import com.trinhminhtriet.app.cli.skel.command.standalone.VersionCommand;
 import com.trinhminhtriet.app.cli.skel.command.file.AddCommand;
@@ -25,6 +26,7 @@ import picocli.CommandLine.Command;
         ListCommand.class,
         FigletCommand.class,
         VersionCommand.class,
+        ConfigCommand.class,
         AutoCompletionCommand.class
     }
 )
