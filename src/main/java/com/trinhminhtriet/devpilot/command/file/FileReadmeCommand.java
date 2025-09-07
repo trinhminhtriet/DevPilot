@@ -1,8 +1,10 @@
 package com.trinhminhtriet.devpilot.command.file;
 
+import com.github.lalyos.jfiglet.FigletFont;
 import com.trinhminhtriet.devpilot.service.ConfigService;
 import com.trinhminhtriet.devpilot.service.TemplateRenderService;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +29,18 @@ public class FileReadmeCommand implements Runnable {
   @Override
   public void run() {
     Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
-    objectMapping.put("projectName", dir.getName());
+    String projectName = dir.getName();
+    objectMapping.put("projectName", projectName);
+    String projectNameFiglet = null;
     try {
-      templateService.renderTemplate("common/README.md.ftl", objectMapping, new File(dir, "README.md"));
-      log.info("README.md added to {}", dir.getAbsolutePath());
-    } catch (Exception e) {
-      log.error("Failed to add README.md", e);
+      projectNameFiglet = FigletFont.convertOneLine(projectName);
+      objectMapping.put("projectNameFiglet", projectNameFiglet);
+      log.info(projectNameFiglet);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
     }
+
+    templateService.renderTemplate("common/README.md.ftl", objectMapping, new File(dir, "README.md"));
+
   }
 }

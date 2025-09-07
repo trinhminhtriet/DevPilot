@@ -12,9 +12,8 @@ public interface TemplateRenderService {
    * @param templatePath The path to the template file
    * @param dataMapping  The data model to merge with the template
    * @param outputFile   The file to write the rendered output to
-   * @throws IOException If an error occurs during template rendering
    */
-  void renderTemplate(String templatePath, Map<String, Object> dataMapping, File outputFile) throws IOException;
+  void renderTemplate(String templatePath, Map<String, Object> dataMapping, File outputFile);
 
   /**
    * Render common templates (README.md, LICENSE, ...)

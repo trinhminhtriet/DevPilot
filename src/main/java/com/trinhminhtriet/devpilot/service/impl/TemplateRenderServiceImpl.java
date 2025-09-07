@@ -30,7 +30,7 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
   }
 
   @Override
-  public void renderTemplate(String templatePath, Map<String, Object> dataMapping, File outputFile) throws IOException {
+  public void renderTemplate(String templatePath, Map<String, Object> dataMapping, File outputFile) {
     try {
       Template template = freemarkerConfig.getTemplate(templatePath);
       try (FileWriter writer = new FileWriter(outputFile)) {
@@ -39,7 +39,6 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
       log.info("✅ Generated file: {}", outputFile);
     } catch (Exception e) {
       log.error("❌ Error generating template {} -> {}", templatePath, outputFile, e);
-      throw new IOException("Template rendering failed", e);
     }
   }
 
