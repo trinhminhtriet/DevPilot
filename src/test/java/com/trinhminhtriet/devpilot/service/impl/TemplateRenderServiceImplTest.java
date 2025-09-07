@@ -33,24 +33,6 @@ class TemplateRenderServiceImplTest {
   }
 
   @Test
-  void testRenderTemplateSuccess() throws Exception {
-    Map<String, Object> data = new HashMap<>();
-    data.put("projectName", "TestProject");
-    StringWriter writer = new StringWriter();
-    doAnswer(invocation -> {
-      ((StringWriter) invocation.getArgument(1)).write("* text=auto eol=lf");
-      return null;
-    }).when(template).process(eq(data), any(StringWriter.class));
-
-    // Use a temp file for output
-    java.io.File tempFile = java.io.File.createTempFile("test", ".md");
-    tempFile.deleteOnExit();
-    service.renderTemplate("templates/common/.gitattributes.ftl", data, new File(tempFile.getAbsolutePath()));
-    String result = new String(java.nio.file.Files.readAllBytes(tempFile.toPath()));
-    assertEquals("* text=auto eol=lf", result);
-  }
-
-  @Test
   void testRenderTemplateThrowsException() throws Exception {
     when(configuration.getTemplate(any(String.class))).thenThrow(new RuntimeException("Template rendering failed"));
     Map<String, Object> data = new HashMap<>();
@@ -59,4 +41,27 @@ class TemplateRenderServiceImplTest {
     });
     assertTrue(exception.getMessage().contains("Template rendering failed"));
   }
+
+  @Test
+  void testRenderTemplateSuccess() throws Exception {
+    Map<String, Object> data = new HashMap<>();
+    File outputFile = new File("output-success.md");
+    doAnswer(invocation -> {
+      // Giả lập việc ghi file thành công
+      Object model = invocation.getArgument(0);
+      Object writer = invocation.getArgument(1);
+      ((java.io.Writer) writer).write("Rendered content");
+      return null;
+    }).when(template).process(any(), any());
+
+    service.renderTemplate("good.ftl", data, outputFile);
+    // Kiểm tra file đã được ghi
+    assertTrue(outputFile.exists());
+    String content = new String(java.nio.file.Files.readAllBytes(outputFile.toPath()));
+    assertEquals("Rendered content", content);
+    // Dọn dẹp
+    outputFile.delete();
+  }
+
+  
 }
