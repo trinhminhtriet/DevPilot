@@ -1,5 +1,6 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
+import com.trinhminhtriet.app.cli.skel.command.rust.RefactorRustCommand;
 import picocli.CommandLine.Command;
 import org.springframework.stereotype.Component;
 

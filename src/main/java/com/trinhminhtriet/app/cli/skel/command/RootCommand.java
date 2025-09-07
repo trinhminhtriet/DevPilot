@@ -1,5 +1,10 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
+import com.trinhminhtriet.app.cli.skel.command.common.ListCommand;
+import com.trinhminhtriet.app.cli.skel.command.standalone.FigletCommand;
+import com.trinhminhtriet.app.cli.skel.command.standalone.VersionCommand;
+import com.trinhminhtriet.app.cli.skel.command.file.AddCommand;
+import com.trinhminhtriet.app.cli.skel.command.git.GitCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;

@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.standalone;
 
 import com.github.lalyos.jfiglet.FigletFont;
 import java.io.IOException;

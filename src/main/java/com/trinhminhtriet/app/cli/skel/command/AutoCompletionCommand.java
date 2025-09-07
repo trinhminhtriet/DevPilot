@@ -19,7 +19,7 @@ public class AutoCompletionCommand implements Runnable {
       AutoComplete.main(new String[]{
           "-n", "skel",
           "-o", "skel_completion.sh",
-          "com.trinhminhtriet.app.cli.skel.command.VersionCommand"
+          "com.trinhminhtriet.app.cli.skel.command.standalone.VersionCommand"
       });
       log.info("Generated autocomplete script: skel_completion.sh");
     } catch (Exception e) {

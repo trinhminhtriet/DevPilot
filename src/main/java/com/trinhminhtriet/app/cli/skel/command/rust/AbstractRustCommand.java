@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.rust;
 
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
 import java.io.File;

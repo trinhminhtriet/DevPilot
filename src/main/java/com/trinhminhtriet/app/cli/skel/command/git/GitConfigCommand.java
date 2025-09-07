@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.git;
 
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import java.io.File;

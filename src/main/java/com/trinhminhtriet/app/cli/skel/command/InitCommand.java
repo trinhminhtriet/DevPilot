@@ -1,5 +1,10 @@
 package com.trinhminhtriet.app.cli.skel.command;
 
+import com.trinhminhtriet.app.cli.skel.command.go.InitGoCommand;
+import com.trinhminhtriet.app.cli.skel.command.java.InitJavaCommand;
+import com.trinhminhtriet.app.cli.skel.command.python.InitPythonCommand;
+import com.trinhminhtriet.app.cli.skel.command.rust.InitRustCommand;
+import com.trinhminhtriet.app.cli.skel.command.typescript.InitTypescriptCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

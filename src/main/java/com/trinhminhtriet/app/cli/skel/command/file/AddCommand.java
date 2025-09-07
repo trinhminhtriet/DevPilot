@@ -1,5 +1,6 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.file;
 
+import com.trinhminhtriet.app.cli.skel.command.vscode.AddVSCodeCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.rust;
 
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;
@@ -16,11 +16,11 @@ import picocli.CommandLine.Option;
 @Component
 @RequiredArgsConstructor
 @Command(
-    name = "java",
-    description = "Initialize a new Java Maven project",
+    name = "rust",
+    description = "Initialize a new Rust project",
     mixinStandardHelpOptions = true
 )
-public class InitJavaCommand implements Runnable {
+public class InitRustCommand extends AbstractRustCommand implements Runnable {
 
   @Option(names = {"--name"}, required = true, description = "Project name")
   private String projectName;
@@ -37,31 +37,28 @@ public class InitJavaCommand implements Runnable {
   @Override
   public void run() {
     if (debug) {
-      log.debug("Starting Java Maven project initialization with name={} in dir={}", projectName, dir);
+      log.debug("Starting Rust project initialization with name={} in dir={}", projectName, dir);
     }
     try {
       if (!dir.exists()) {
         dir.mkdirs();
       }
+
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
       objectMapping.put("projectName", projectName);
 
-      templateService.renderCommonTemplates(objectMapping, dir);
-
-      templateService.renderTemplate("java/gitignore.ftl", objectMapping, new File(dir, ".gitignore"));
-      templateService.renderTemplate("java/gitattributes.ftl", objectMapping, new File(dir, ".gitattributes"));
-      templateService.renderTemplate("java/editorconfig.ftl", objectMapping, new File(dir, ".editorconfig"));
-      templateService.renderTemplate("java/pom.xml.ftl", objectMapping, new File(dir, "pom.xml"));
-      templateService.renderTemplate("java/Makefile.ftl", objectMapping, new File(dir, "Makefile"));
+      renderTemplate(templateService, objectMapping, dir);
 
       File srcDir = new File(dir, "src");
       if (!srcDir.exists()) {
         srcDir.mkdirs();
       }
 
-      log.info("Java Maven project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
+      templateService.renderTemplate("rust/src/main.rs.ftl", objectMapping, new File(srcDir, "main.rs"));
+
+      log.info("Rust project '{}' initialized successfully at {}", projectName, dir.getCanonicalPath());
     } catch (IOException e) {
-      log.error("Error initializing Java Maven project", e);
+      log.error("Error initializing Rust project", e);
     }
   }
 }

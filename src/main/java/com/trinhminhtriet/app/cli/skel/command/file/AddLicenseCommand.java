@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.file;
 
 import com.trinhminhtriet.app.cli.skel.service.ConfigService;
 import com.trinhminhtriet.app.cli.skel.service.TemplateRenderService;

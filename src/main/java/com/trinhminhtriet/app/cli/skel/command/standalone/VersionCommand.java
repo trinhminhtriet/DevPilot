@@ -1,4 +1,4 @@
-package com.trinhminhtriet.app.cli.skel.command;
+package com.trinhminhtriet.app.cli.skel.command.standalone;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
