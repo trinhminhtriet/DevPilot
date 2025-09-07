@@ -11,8 +11,10 @@ import static org.mockito.Mockito.verify;
 
 import com.trinhminhtriet.devpilot.service.TemplateRenderService;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,20 +27,20 @@ class JavaProjectActionServiceImplTest {
   private Map<String, Object> config;
 
   @BeforeEach
-  void setUp() {
+  void setUp() throws IOException {
     templateService = mock(TemplateRenderService.class);
     javaService = new JavaProjectActionServiceImpl(templateService);
     tempDir = new File("test-java-project");
     if (tempDir.exists()) {
-      tempDir.delete();
+      FileUtils.deleteDirectory(tempDir);
     }
     config = new HashMap<>();
   }
 
   @AfterEach
-  void cleanup() {
+  void cleanup() throws IOException {
     if (tempDir.exists()) {
-      tempDir.delete();
+      FileUtils.deleteDirectory(tempDir);
     }
   }
 

@@ -26,6 +26,7 @@
     <toml4j.version>0.7.2</toml4j.version>
     <jfiglet.version>0.0.9</jfiglet.version>
     <apache.commons.version>3.18.0</apache.commons.version>
+    <commons-io.version>2.20.0</commons-io.version>
   </properties>
   <dependencies>
     <dependency>
@@ -93,6 +94,13 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>${apache.commons.version}</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>${commons-io.version}</version>
     </dependency>
 
   </dependencies>

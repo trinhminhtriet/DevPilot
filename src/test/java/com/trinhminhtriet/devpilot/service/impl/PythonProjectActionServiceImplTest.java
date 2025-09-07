@@ -1,6 +1,8 @@
 package com.trinhminhtriet.devpilot.service.impl;
 
 import com.trinhminhtriet.devpilot.service.TemplateRenderService;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +29,9 @@ class PythonProjectActionServiceImplTest {
     }
 
     @AfterEach
-    void cleanup() {
+    void cleanup() throws IOException {
         if (tempDir.exists()) {
-            tempDir.delete();
+            FileUtils.deleteDirectory(tempDir);
         }
     }
 
