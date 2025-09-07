@@ -37,7 +37,7 @@ public class TypescriptProjectActionServiceImpl implements ProjectActionService 
 
   @Override
   public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
-    log.info("[TypeScript] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    log.info("[TypeScript] Refactoring project '{}' in '{}' with type '{}'", projectName, dir, type);
     // TODO: Add logic for refactoring TypeScript project
   }
 }

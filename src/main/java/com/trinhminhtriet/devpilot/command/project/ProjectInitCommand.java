@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
@@ -31,17 +30,17 @@ public class ProjectInitCommand implements Runnable {
   public void run() {
     String supportedLangs = String.join(", ", projectActionServices.keySet());
     if (!projectActionServices.containsKey(lang.toLowerCase())) {
-      System.err.printf("Unsupported language: %s. Supported languages are: %s%n", lang, supportedLangs);
+      log.error("Unsupported language:{}. Supported languages are: {}", lang, supportedLangs);
       return;
     }
     String interfaceName = ProjectActionService.class.getSimpleName();
     String implementationName = lang.toLowerCase() + interfaceName + "Impl";
     ProjectActionService service = projectActionServices.get(implementationName);
     if (service == null) {
-      System.err.printf("Unsupported language: %s%n", lang);
+      log.error("Unsupported language: {}", lang);
       return;
     }
-    log.info("[%s] Initializing project: %s%n", lang, name);
+    log.info("[{}] Initializing project: {}", lang, name);
     try {
       Map<String, Object> objectMapping = new HashMap<>(configService.loadConfig());
       objectMapping.put("projectName", name);
@@ -49,7 +48,7 @@ public class ProjectInitCommand implements Runnable {
       File dir = new File(name);
       service.scaffoldProject(name, dir, objectMapping);
     } catch (Exception e) {
-      System.err.println("Error initializing " + lang + " project: " + e.getMessage());
+      log.error("Error initializing {} project: {}", name, e.getMessage());
     }
   }
 }

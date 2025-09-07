@@ -36,7 +36,7 @@ public class GoProjectActionServiceImpl implements ProjectActionService {
 
   @Override
   public void refactorProject(String projectName, File dir, Map<String, Object> config, String type) throws IOException {
-    log.info("[Go] Refactoring project '%s' in '%s' with type '%s'%n", projectName, dir, type);
+    log.info("[Go] Refactoring project '{}' in '{}' with type '{}'", projectName, dir, type);
     // TODO: Add logic for refactoring Go project
   }
 }

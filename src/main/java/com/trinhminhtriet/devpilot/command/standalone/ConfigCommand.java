@@ -26,7 +26,7 @@ public class ConfigCommand implements Runnable {
   @Override
   public void run() {
     String configPath = configService.getConfigFilePath();
-    log.info("Config file path: " + configPath);
+    log.info("Config file path: {}", configPath);
     if (edit) {
       try {
         String os = System.getProperty("os.name").toLowerCase();
@@ -40,7 +40,7 @@ public class ConfigCommand implements Runnable {
         }
         process.waitFor();
       } catch (Exception e) {
-        System.err.println("Could not open editor: " + e.getMessage());
+        log.error("Could not open editor: {}", e.getMessage());
       }
     }
   }
