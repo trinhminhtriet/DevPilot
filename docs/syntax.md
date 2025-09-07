@@ -2,7 +2,7 @@
 ## Package Structure
 
 ```
-com.trinhminhtriet.app.cli.skel
+com.trinhminhtriet.devpilot
 │
 ├── command/
 │   ├── common/         # Shared commands: 
@@ -25,7 +25,7 @@ com.trinhminhtriet.app.cli.skel
 │
 ├── resources/          # Configuration files, external resources (application.yml, logback.xml, ...)
 │
-└── SkelApplication.java # Spring Boot entry point
+└── DevPilotApplication.java # Spring Boot entry point
 ```
 
 common: Shared commands such as `info`, `config`, `clean`, `doctor`, `upgrade`, `release`, `interactive`, `scaffold`, `serve`, `doc`, `add`, `deps`, `format`, `lint`, `test` are placed in this package. These commands are language-agnostic and can be applied to any project.
@@ -34,28 +34,28 @@ common: Shared commands such as `info`, `config`, `clean`, `doctor`, `upgrade`, 
 ## Proposed CLI Syntax
 
 ```
-skel <group> <action> [options]
+devpilot <group> <action> [options]
 ```
 
 Examples:
-- `skel project init --lang rust --name myproj`
-- `skel project info --dir .`
-- `skel project clean`
-- `skel project release`
-- `skel config set author.name="Your Name"`
-- `skel config show`
-- `skel test run`
-- `skel lint run`
-- `skel format run`
-- `skel deps list`
-- `skel deps update`
-- `skel add readme`
-- `skel add license`
-- `skel scaffold microservice`
-- `skel serve web`
-- `skel doc generate`
-- `skel upgrade`
-- `skel doctor`
+- `devpilot project init --lang rust --name myproj`
+- `devpilot project info --dir .`
+- `devpilot project clean`
+- `devpilot project release`
+- `devpilot config set author.name="Your Name"`
+- `devpilot config show`
+- `devpilot test run`
+- `devpilot lint run`
+- `devpilot format run`
+- `devpilot deps list`
+- `devpilot deps update`
+- `devpilot add readme`
+- `devpilot add license`
+- `devpilot scaffold microservice`
+- `devpilot serve web`
+- `devpilot doc generate`
+- `devpilot upgrade`
+- `devpilot doctor`
 
 This approach helps you:
 - Group commands by topic (`project`, `config`, `test`, `add`, ...)

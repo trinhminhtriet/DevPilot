@@ -10,9 +10,9 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.trinhminhtriet.app.cli</groupId>
-  <artifactId>skel</artifactId>
+  <artifactId>devpilot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>skel</name>
+  <name>devpilot</name>
   <description>🚀 All-in-one CLI toolkit for developers: scaffold, manage, automate, and boost productivity across languages!
   </description>
   <url/>

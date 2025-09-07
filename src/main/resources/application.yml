@@ -1,10 +1,10 @@
 spring:
   application:
-    name: skel
+    name: DevPilot
   main:
     banner-mode: off
 
-skel:
+devpilot:
   author:
     name: "Trinh Minh Triet"
     email: "contact@trinhminhtriet.com"

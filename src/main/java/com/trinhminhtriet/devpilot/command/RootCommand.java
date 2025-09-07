@@ -13,10 +13,10 @@ import picocli.CommandLine.Command;
 @Slf4j
 @Component
 @Command(
-    name = "skel",
+    name = "devpilot",
     mixinStandardHelpOptions = true,
-    version = "skel 1.0.0",
-    description = "Project scaffolding CLI generator",
+    version = "DevPilot 1.0.0",
+    description = "\uD83D\uDE80 All-in-one CLI toolkit for developers: scaffold, manage, automate, and boost productivity across languages!",
     subcommands = {
         StrapiCommand.class,
         GitCommand.class,

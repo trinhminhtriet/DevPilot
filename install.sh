@@ -1,18 +1,22 @@
 #!/bin/bash
 
-JAR="target/skel-0.0.1-SNAPSHOT.jar"
+set -ex
+
+JAR="target/devpilot-0.0.1-SNAPSHOT.jar"
 BIN_DIR="$HOME/.local/bin"
-SKEL_SH="$BIN_DIR/skel"
+DEVPILOT_SH="$BIN_DIR/pilot"
 
 mkdir -p "$BIN_DIR"
-cp "$JAR" "$BIN_DIR/skel-cli.jar"
+cp "$JAR" "$BIN_DIR/devpilot-cli.jar"
 
-cat > "$SKEL_SH" <<EOF
+cat > "$DEVPILOT_SH" <<EOF
 #!/bin/sh
-java -jar "\$HOME/.local/bin/skel-cli.jar" "\$@"
+java -jar "\$HOME/.local/bin/devpilot-cli.jar" "\$@"
 EOF
 
-chmod +x "$SKEL_SH"
+ls -la "$BIN_DIR"
 
-echo "Installed skel to $SKEL_SH"
+chmod +x "$DEVPILOT_SH"
+
+echo "Installed devpilot to $DEVPILOT_SH"
 echo "Add $BIN_DIR to your PATH if not already."

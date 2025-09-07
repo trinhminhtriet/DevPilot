@@ -8,7 +8,7 @@ The **Scaffolder CLI** project aims to evolve from a simple project initializer 
 
 * [ ] Generate **README.md** and **LICENSE** (MIT, Apache 2.0, GPL)
 * [ ] Support basic multi-language scaffolding: **Rust**, **Go**, **Python**
-* [ ] **Config profiles** (`~/.skel/config.yml`) for author, email, default license
+* [ ] **Config profiles** (`~/.devpilot/config.yml`) for author, email, default license
 * [ ] Auto `git init` + initial commit
 
 👉 **Goal**: Quickly create a ready-to-use project with a standard structure.
@@ -17,7 +17,7 @@ The **Scaffolder CLI** project aims to evolve from a simple project initializer 
 
 ## ⚡ Phase 2 – Developer Experience
 
-* [ ] **Custom templates**: Allow defining `.ftl` in `~/.skel/templates/`
+* [ ] **Custom templates**: Allow defining `.ftl` in `~/.devpilot/templates/`
 * [ ] Generate **.gitignore** & **.editorconfig** per language
 * [ ] **CI/CD templates**: GitHub Actions, GitLab CI, Jenkinsfile
 * [ ] **Interactive mode** (`--interactive`) to input project name, author, license

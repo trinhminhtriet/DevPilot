@@ -11,6 +11,6 @@ public class VersionCommand implements Runnable {
 
   @Override
   public void run() {
-    log.info("skel CLI version 1.0.0");
+    log.info("DevPilot version 1.0.0");
   }
 }

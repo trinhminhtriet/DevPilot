@@ -17,11 +17,11 @@ public class AutoCompletionCommand implements Runnable {
   public void run() {
     try {
       AutoComplete.main(new String[]{
-          "-n", "skel",
-          "-o", "skel_completion.sh",
-          "com.trinhminhtriet.app.cli.skel.command.standalone.VersionCommand"
+          "-n", "devpilot",
+          "-o", "devpilot_completion.sh",
+          "com.trinhminhtriet.devpilot.command.standalone.VersionCommand"
       });
-      log.info("Generated autocomplete script: skel_completion.sh");
+      log.info("Generated autocomplete script: devpilot_completion.sh");
     } catch (Exception e) {
       log.info(e.getMessage());
       e.printStackTrace();

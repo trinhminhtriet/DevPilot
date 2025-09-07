@@ -10,12 +10,12 @@
 
   <!-- Rolling File Appender -->
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/skel-cli.log</file>
+    <file>logs/devpilot-cli.log</file>
     <encoder>
       <pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level - %msg%n</pattern>
     </encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>logs/skel-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>logs/devpilot-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
       <maxHistory>7</maxHistory>
     </rollingPolicy>
   </appender>
@@ -27,5 +27,5 @@
   </root>
 
   <!-- More fine-grained logging -->
-  <logger name="com.trinhminhtriet.app.cli.skel" level="DEBUG"/>
+  <logger name="com.trinhminhtriet.devpilot" level="DEBUG"/>
 </configuration>

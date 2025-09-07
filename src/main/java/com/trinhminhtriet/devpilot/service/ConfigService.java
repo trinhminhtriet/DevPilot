@@ -5,14 +5,14 @@ import java.util.Map;
 public interface ConfigService {
 
   /**
-   * Load config from ~/.skel/config.yml
+   * Load config from ~/.devpilot/config.yml
    *
    * @return Map of config values (authorName, authorEmail, license, ...)
    */
   Map<String, Object> loadConfig();
 
   /**
-   * Save config to ~/.skel/config.yml
+   * Save config to ~/.devpilot/config.yml
    */
   void saveConfig(Map<String, Object> config);
 
@@ -22,7 +22,7 @@ public interface ConfigService {
   String getValue(String key);
 
   /**
-   * Get the absolute path to the config file (e.g. ~/.skel/config.yml)
+   * Get the absolute path to the config file (e.g. ~/.devpilot/config.yml)
    */
   String getConfigFilePath();
 

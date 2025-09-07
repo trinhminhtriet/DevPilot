@@ -47,8 +47,8 @@ best practices and templates.
 ### Build
 
 ```shell
-git clone https://github.com/your-username/skel-cli.git
-cd skel-cli
+git clone https://github.com/your-username/devpilot-cli.git
+cd devpilot-cli
 mvn clean package
 ```
 
@@ -66,15 +66,15 @@ export PATH="$HOME/.local/bin:$PATH"
 ### Run help
 
 ```shell
-skel --help
+devpilot --help
 ```
 
 Now you can use:
 
 ```shell
-skel init rust --name MyRustApp --dir ./MyRustApp
-skel init go --name MyGoApp --dir ./MyGoApp
-skel init python --name MyPythonApp --dir ./MyPythonApp
+devpilot init rust --name MyRustApp --dir ./MyRustApp
+devpilot init go --name MyGoApp --dir ./MyGoApp
+devpilot init python --name MyPythonApp --dir ./MyPythonApp
 ```
 
 ## 🤝 How to contribute

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ConfigServiceImpl implements ConfigService {
 
-  private static final String CONFIG_PATH = System.getProperty("user.home") + "/.skel/config.yml";
+  private static final String CONFIG_PATH = System.getProperty("user.home") + "/.devpilot/config.yml";
 
   @Override
   public Map<String, Object> loadConfig() {
