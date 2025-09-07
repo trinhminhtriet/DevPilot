@@ -4,9 +4,7 @@
   <!-- Console Appender -->
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-      <pattern>
-        %highlight([%d{yyyy-MM-dd HH:mm:ss}] %-5level) [%thread] %cyan(%logger{36}) - %msg%n
-      </pattern>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level - %msg%n</pattern>
     </encoder>
   </appender>
 
@@ -14,7 +12,7 @@
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>logs/skel-cli.log</file>
     <encoder>
-      <pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level [%thread] %logger{36} - %msg%n</pattern>
+      <pattern>[%d{yyyy-MM-dd HH:mm:ss}] %-5level - %msg%n</pattern>
     </encoder>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>logs/skel-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
