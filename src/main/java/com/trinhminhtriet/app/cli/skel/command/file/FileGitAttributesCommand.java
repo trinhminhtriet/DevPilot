@@ -14,7 +14,7 @@ import picocli.CommandLine.Option;
 @Component
 @Command(name = "gitattributes", description = "Add .gitattributes to current directory", mixinStandardHelpOptions = true)
 @RequiredArgsConstructor
-public class AddGitAttributesCommand implements Runnable {
+public class FileGitAttributesCommand implements Runnable {
 
   private final TemplateRenderService templateService;
 

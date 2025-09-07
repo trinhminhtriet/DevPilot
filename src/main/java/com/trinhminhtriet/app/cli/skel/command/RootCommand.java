@@ -4,7 +4,7 @@ import com.trinhminhtriet.app.cli.skel.command.common.ListCommand;
 import com.trinhminhtriet.app.cli.skel.command.standalone.ConfigCommand;
 import com.trinhminhtriet.app.cli.skel.command.standalone.FigletCommand;
 import com.trinhminhtriet.app.cli.skel.command.standalone.VersionCommand;
-import com.trinhminhtriet.app.cli.skel.command.file.AddCommand;
+import com.trinhminhtriet.app.cli.skel.command.file.FileCommand;
 import com.trinhminhtriet.app.cli.skel.command.git.GitCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import picocli.CommandLine.Command;
     subcommands = {
         StrapiCommand.class,
         GitCommand.class,
-        AddCommand.class,
+        FileCommand.class,
         RefactorCommand.class,
         InitCommand.class,
         ListCommand.class,

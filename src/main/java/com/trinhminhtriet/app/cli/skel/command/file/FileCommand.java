@@ -9,19 +9,19 @@ import picocli.CommandLine.Command;
 @Slf4j
 @Component
 @Command(
-    name = "add",
+    name = "file",
     description = "Add individual template files to your project",
     subcommands = {
-        AddReadmeCommand.class,
-        AddLicenseCommand.class,
-        AddGitAttributesCommand.class,
+        FileReadmeCommand.class,
+        FileLicenseCommand.class,
+        FileGitAttributesCommand.class,
         AddVSCodeCommand.class,
-        AddEditorConfigCommand.class
+        FileEditorConfigCommand.class
     },
     mixinStandardHelpOptions = true
 )
 @RequiredArgsConstructor
-public class AddCommand implements Runnable {
+public class FileCommand implements Runnable {
 
   @Override
   public void run() {

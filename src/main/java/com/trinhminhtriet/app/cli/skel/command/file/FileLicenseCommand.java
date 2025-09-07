@@ -15,7 +15,7 @@ import picocli.CommandLine.Option;
 @Component
 @Command(name = "license", description = "Add LICENSE to current directory", mixinStandardHelpOptions = true)
 @RequiredArgsConstructor
-public class AddLicenseCommand implements Runnable {
+public class FileLicenseCommand implements Runnable {
 
   private final ConfigService configService;
   private final TemplateRenderService templateService;
