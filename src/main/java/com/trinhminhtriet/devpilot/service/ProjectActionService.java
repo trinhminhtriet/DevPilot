@@ -4,6 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public interface ProjectScaffoldService {
+public interface ProjectActionService {
     void scaffoldProject(String projectName, File dir, Map<String, Object> config) throws IOException;
 }

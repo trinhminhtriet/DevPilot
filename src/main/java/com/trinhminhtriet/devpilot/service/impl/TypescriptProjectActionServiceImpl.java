@@ -1,6 +1,6 @@
 package com.trinhminhtriet.devpilot.service.impl;
 
-import com.trinhminhtriet.devpilot.service.ProjectScaffoldService;
+import com.trinhminhtriet.devpilot.service.ProjectActionService;
 import com.trinhminhtriet.devpilot.service.TemplateRenderService;
 import java.io.File;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class TypescriptProjectScaffoldServiceImpl implements ProjectScaffoldService {
+public class TypescriptProjectActionServiceImpl implements ProjectActionService {
 
   private final TemplateRenderService templateService;
 
