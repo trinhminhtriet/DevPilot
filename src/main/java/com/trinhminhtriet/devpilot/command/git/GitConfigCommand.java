@@ -40,11 +40,11 @@ public class GitConfigCommand implements Runnable {
 
       if (authorName != null && !authorName.isEmpty()) {
         new ProcessBuilder("git", "config", "user.name", authorName).directory(dir).start().waitFor();
-        log.info("✅ git config user.name to {}", authorName);
+        log.info("✅ git config user.name \"{}\"", authorName);
       }
       if (authorEmail != null && !authorEmail.isEmpty()) {
         new ProcessBuilder("git", "config", "user.email", authorEmail).directory(dir).start().waitFor();
-        log.info("✅ git config user.email to {}", authorEmail);
+        log.info("✅ git config user.email \"{}\"", authorEmail);
       }
     } catch (Exception e) {
       log.error("❌ Failed to set git config: {}", e.getMessage());
