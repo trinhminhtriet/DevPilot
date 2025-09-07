@@ -21,19 +21,19 @@ public class ProjectInitCommand implements Runnable {
   @Option(names = "--name", description = "Project name", required = true)
   private String name;
 
-  private final Map<String, ProjectActionService> scaffoldServices;
+  private final Map<String, ProjectActionService> projectActionServices;
   private final ConfigService configService;
 
   @Override
   public void run() {
-    String supportedLangs = String.join(", ", scaffoldServices.keySet());
-    if (!scaffoldServices.containsKey(lang.toLowerCase())) {
+    String supportedLangs = String.join(", ", projectActionServices.keySet());
+    if (!projectActionServices.containsKey(lang.toLowerCase())) {
       System.err.printf("Unsupported language: %s. Supported languages are: %s%n", lang, supportedLangs);
       return;
     }
     String interfaceName = ProjectActionService.class.getSimpleName();
     String implementationName = lang.toLowerCase() + interfaceName + "Impl";
-    ProjectActionService service = scaffoldServices.get(implementationName);
+    ProjectActionService service = projectActionServices.get(implementationName);
     if (service == null) {
       System.err.printf("Unsupported language: %s%n", lang);
       return;
