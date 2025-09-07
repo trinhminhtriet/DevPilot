@@ -1,43 +1,43 @@
 
-## Package cấu trúc
+## Package Structure
 
 ```
 com.trinhminhtriet.app.cli.skel
 │
 ├── command/
-│   ├── common/         # Các lệnh dùng chung: 
-│   ├── rust/           # Lệnh riêng cho Rust: InitRustCommand, RefactorRustCommand, ...
-│   ├── python/         # Lệnh riêng cho Python: InitPythonCommand, ...
-│   ├── go/             # Lệnh riêng cho Go: InitGoCommand, ...
-│   ├── typescript/     # Lệnh riêng cho TypeScript: InitTypescriptCommand, ...
-│   └── ...             # Có thể mở rộng cho các ngôn ngữ khác
+│   ├── common/         # Shared commands: 
+│   ├── rust/           # Rust-specific commands: InitRustCommand, RefactorRustCommand, ...
+│   ├── python/         # Python-specific commands: InitPythonCommand, ...
+│   ├── go/             # Go-specific commands: InitGoCommand, ...
+│   ├── typescript/     # TypeScript-specific commands: InitTypescriptCommand, ...
+│   └── ...             # Extendable for other languages
 │
-├── service/            # Interface và logic cho các service (ConfigService, TemplateRenderService, TomlService, ...)
-│   ├── impl/           # Triển khai các service
+├── service/            # Interfaces and logic for services (ConfigService, TemplateRenderService, TomlService, ...)
+│   ├── impl/           # Service implementations
 │
-├── model/              # Các class model, DTO, entity dùng chung
+├── model/              # Shared model, DTO, entity classes
 │
-├── util/               # Các tiện ích, helper dùng chung
+├── util/               # Shared utilities and helpers
 │
-├── config/             # Cấu hình ứng dụng, constants, enums
+├── config/             # Application configuration, constants, enums
 │
-├── templates/          # Các file template cho từng ngôn ngữ và file chuẩn
+├── templates/          # Template files for each language and standard files
 │
-├── resources/          # File cấu hình, tài nguyên ngoài (application.yml, logback.xml, ...)
+├── resources/          # Configuration files, external resources (application.yml, logback.xml, ...)
 │
-└── SkelApplication.java # Entry point Spring Boot
+└── SkelApplication.java # Spring Boot entry point
 ```
 
-common: Các lệnh dùng chung như `info`, `config`, `clean`, `doctor`, `upgrade`, `release`, `interactive`, `scaffold`, `serve`, `doc`, `add`, `deps`, `format`, `lint`, `test` sẽ được đặt trong package này. Các lệnh này không phụ thuộc vào ngôn ngữ cụ thể và có thể áp dụng cho mọi dự án.
+common: Shared commands such as `info`, `config`, `clean`, `doctor`, `upgrade`, `release`, `interactive`, `scaffold`, `serve`, `doc`, `add`, `deps`, `format`, `lint`, `test` are placed in this package. These commands are language-agnostic and can be applied to any project.
 
 
-## Syntax đề xuất cho CLI
+## Proposed CLI Syntax
 
 ```
 skel <group> <action> [options]
 ```
 
-Ví dụ:
+Examples:
 - `skel project init --lang rust --name myproj`
 - `skel project info --dir .`
 - `skel project clean`
@@ -57,9 +57,9 @@ Ví dụ:
 - `skel upgrade`
 - `skel doctor`
 
-Cách này giúp bạn:
-- Gom nhóm các lệnh theo chủ đề (`project`, `config`, `test`, `add`, ...)
-- Dễ thêm subcommand mới mà không xung đột tên
-- Tích hợp Picocli dễ dàng với annotation `@Command(subcommands = {...})`
+This approach helps you:
+- Group commands by topic (`project`, `config`, `test`, `add`, ...)
+- Easily add new subcommands without name conflicts
+- Integrate Picocli easily with the `@Command(subcommands = {...})` annotation
 
-Bạn muốn tôi tạo khung lệnh theo cấu trúc này cho các nhóm lệnh không?
+Would you like me to create a command skeleton following this structure for the command groups?

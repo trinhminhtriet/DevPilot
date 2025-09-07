@@ -1,19 +1,17 @@
-Dưới đây là một số ý tưởng lệnh CLI hữu ích cho developers mà bạn có thể tích hợp vào Skel CLI:
 
-- `skel doctor`: Kiểm tra môi trường, phiên bản, biến môi trường, cấu hình hệ thống.
-- `skel upgrade`: Tự động cập nhật Skel CLI lên phiên bản mới nhất.
-- `skel lint`: Chạy linter cho dự án (tùy ngôn ngữ: rustfmt, flake8, eslint...).
-- `skel format`: Tự động format code toàn bộ dự án.
-- `skel test`: Chạy toàn bộ test của dự án.
-- `skel deps`: Hiển thị, kiểm tra, cập nhật dependencies.
-- `skel clean`: Xóa các file build, cache, log, thư mục tạm.
-- `skel info`: Hiển thị thông tin dự án (tên, phiên bản, license, tác giả...).
-- `skel release`: Tạo bản release mới (tag, changelog, build, publish).
-- `skel add <file>`: Thêm file chuẩn (README, LICENSE, CONTRIBUTING, .gitignore...) vào dự án.
-- `skel config`: Quản lý cấu hình cá nhân (author, email, license...).
-- `skel interactive`: Chế độ khởi tạo dự án tương tác (hỏi đáp từng bước).
-- `skel scaffold <type>`: Sinh nhanh cấu trúc cho microservice, REST API, CLI, webapp...
-- `skel serve`: Chạy server dev (cho web, API, docs...).
-- `skel doc`: Sinh tài liệu dự án từ code/comments.
-
-Bạn muốn triển khai lệnh nào trước?
+## Skel CLI Commands
+- `skel doctor`: Check environment, versions, environment variables, and system configuration.
+- `skel upgrade`: Automatically update Skel CLI to the latest version.
+- `skel lint`: Run linter for the project (depending on language: rustfmt, flake8, eslint...).
+- `skel format`: Automatically format the entire project code.
+- `skel test`: Run all project tests.
+- `skel deps`: Display, check, and update dependencies.
+- `skel clean`: Remove build files, cache, logs, and temporary folders.
+- `skel info`: Show project information (name, version, license, author...).
+- `skel release`: Create a new release (tag, changelog, build, publish).
+- `skel add <file>`: Add standard files (README, LICENSE, CONTRIBUTING, .gitignore...) to the project.
+- `skel config`: Manage personal configuration (author, email, license...).
+- `skel interactive`: Interactive project initialization mode (step-by-step Q&A).
+- `skel scaffold <type>`: Quickly generate structure for microservice, REST API, CLI, webapp...
+- `skel serve`: Run development server (for web, API, docs...).
+- `skel doc`: Generate project documentation from code/comments.
