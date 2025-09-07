@@ -1,0 +1,39 @@
+package com.trinhminhtriet.devpilot.command;
+
+import com.trinhminhtriet.devpilot.command.common.ListCommand;
+import com.trinhminhtriet.devpilot.command.standalone.ConfigCommand;
+import com.trinhminhtriet.devpilot.command.standalone.FigletCommand;
+import com.trinhminhtriet.devpilot.command.standalone.VersionCommand;
+import com.trinhminhtriet.devpilot.command.file.FileCommand;
+import com.trinhminhtriet.devpilot.command.git.GitCommand;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
+import picocli.CommandLine.Command;
+
+@Slf4j
+@Component
+@Command(
+    name = "skel",
+    mixinStandardHelpOptions = true,
+    version = "skel 1.0.0",
+    description = "Project scaffolding CLI generator",
+    subcommands = {
+        StrapiCommand.class,
+        GitCommand.class,
+        FileCommand.class,
+        RefactorCommand.class,
+        InitCommand.class,
+        ListCommand.class,
+        FigletCommand.class,
+        VersionCommand.class,
+        ConfigCommand.class,
+        AutoCompletionCommand.class
+    }
+)
+public class RootCommand implements Runnable {
+
+  @Override
+  public void run() {
+    log.info("Use --help to see available commands.");
+  }
+}

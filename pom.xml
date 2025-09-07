@@ -13,8 +13,7 @@
   <artifactId>skel</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>skel</name>
-  <description>🦴 Skel CLI: A command-line tool for generating project skeletons in multiple
-    languages, fast and customizable.
+  <description>🚀 All-in-one CLI toolkit for developers: scaffold, manage, automate, and boost productivity across languages!
   </description>
   <url/>
   <licenses>
