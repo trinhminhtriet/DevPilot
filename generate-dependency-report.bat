@@ -10,5 +10,5 @@ if "%1" == "all" set ONLY_UPGRADE=
 
 set EXTRA=-Dmaven.version.ignore=".+[0-9\.-]M[0-9]*,.+CR[0-9]*,.*[0-9\.-]dev,.*[0-9\.-]alpha[0-9]*,.*[0-9\.-]beta[0-9]*,.*[0-9\.-]rc[0-9]*,.*[0-9\.-]pre[0-9]*,200.*,.*[0-9\.-]Alpha[0-9]*,.*MISTAKE.*"
 call mvn org.codehaus.mojo:versions-maven-plugin:2.19.0:dependency-updates-aggregate-report org.codehaus.mojo:versions-maven-plugin:2.19.0:plugin-updates-aggregate-report %ONLY_UPGRADE% %EXTRA%
-start target/site/dependency-updates-aggregate-report.html
-start target/site/plugin-updates-aggregate-report.html
+start target/reports/dependency-updates-aggregate-report.html
+start target/reports/plugin-updates-aggregate-report.html

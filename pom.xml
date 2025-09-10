@@ -21,12 +21,13 @@
     <versions-maven-plugin.version>2.19.0</versions-maven-plugin.version>
     <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
     <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
-    <fasterxml.jackson.version>2.19.2</fasterxml.jackson.version>
+    <fasterxml.jackson.version>2.20.0</fasterxml.jackson.version>
     <picocli.version>4.7.7</picocli.version>
     <toml4j.version>0.7.2</toml4j.version>
     <jfiglet.version>0.0.9</jfiglet.version>
     <apache.commons.version>3.18.0</apache.commons.version>
     <commons-io.version>2.20.0</commons-io.version>
+    <lombok.version>1.18.40</lombok.version>
   </properties>
   <dependencies>
     <dependency>
@@ -54,6 +55,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
       <scope>provided</scope>
       <optional>true</optional>
     </dependency>
