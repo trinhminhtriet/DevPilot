@@ -39,6 +39,8 @@ best practices and templates.
 
 ## 🚀 Installation
 
+- Download the latest JAR from the [releases page](https://github.com/trinhminhtriet/DevPilot/releases).
+
 ### Prerequisites
 
 - **Java 17+**
@@ -47,8 +49,8 @@ best practices and templates.
 ### Build
 
 ```shell
-git clone https://github.com/your-username/devpilot-cli.git
-cd devpilot-cli
+git clone https://github.com/trinhminhtriet/DevPilot.git
+cd DevPilot
 mvn clean package
 ```
 
