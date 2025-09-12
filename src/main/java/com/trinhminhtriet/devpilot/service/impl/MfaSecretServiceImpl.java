@@ -6,6 +6,7 @@ import com.trinhminhtriet.devpilot.dto.UpdateMfaSecretRequest;
 import com.trinhminhtriet.devpilot.entity.MfaSecret;
 import com.trinhminhtriet.devpilot.repository.MfaSecretRepository;
 import com.trinhminhtriet.devpilot.service.MfaSecretService;
+import com.trinhminhtriet.devpilot.utils.RSAUtil;
 import de.vandermeer.asciitable.AsciiTable;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,6 +73,14 @@ public class MfaSecretServiceImpl implements MfaSecretService {
       asciiTable.addRule();
     }
     return asciiTable.render();
+  }
+
+  @Override
+  public String decode(Long id) throws Exception {
+    MfaSecret mfaSecret = repository.findById(id).orElseThrow();
+    String secret = mfaSecret.getSecret();
+    RSAUtil rsaUtil = RSAUtil.getInstance();
+    return rsaUtil.decode(secret);
   }
 
   private MfaSecretDto toDto(MfaSecret entity) {

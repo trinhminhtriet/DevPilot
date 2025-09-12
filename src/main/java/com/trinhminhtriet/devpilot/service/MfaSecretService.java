@@ -19,4 +19,5 @@ public interface MfaSecretService {
 
   String toAsciiTable();
 
+  String decode(Long id) throws Exception;
 }
