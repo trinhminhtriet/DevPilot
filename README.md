@@ -1,4 +1,4 @@
-# DevPilot
+# pilot
 
 ```
   ____             ____  _ _       _   
@@ -10,7 +10,7 @@
 
 ## Intro
 
-**DevPilot** is a command-line tool built with **Spring Boot**, **Picocli**, and **Freemarker**.  
+**pilot** is a command-line tool built with **Spring Boot**, **Picocli**, and **Freemarker**.  
 It helps developers quickly generate project scaffolding for multiple languages such as **Rust**, **Golang**, **Python**, and **TypeScript**, including essential files like `README.md`, `LICENSE`,
 `.gitignore`, `.editorconfig`, `.vscode/settings.json`, and `CHANGELOG.md`.
 
@@ -39,7 +39,7 @@ best practices and templates.
 
 ## 🚀 Installation
 
-- Download the latest JAR from the [releases page](https://github.com/trinhminhtriet/DevPilot/releases).
+- Download the latest JAR from the [releases page](https://github.com/trinhminhtriet/pilot/releases).
 
 ### Prerequisites
 
@@ -49,8 +49,8 @@ best practices and templates.
 ### Build
 
 ```shell
-git clone https://github.com/trinhminhtriet/DevPilot.git
-cd DevPilot
+git clone https://github.com/trinhminhtriet/pilot.git
+cd pilot
 mvn clean package
 ```
 
@@ -68,15 +68,14 @@ export PATH="$HOME/.local/bin:$PATH"
 ### Run help
 
 ```shell
-devpilot --help
+pilot --help
 ```
 
 Now you can use:
 
 ```shell
-devpilot init rust --name MyRustApp --dir ./MyRustApp
-devpilot init go --name MyGoApp --dir ./MyGoApp
-devpilot init python --name MyPythonApp --dir ./MyPythonApp
+pilot project init --name myApp --lang go --dir ./myApp
+
 ```
 
 ## 🤝 How to contribute
