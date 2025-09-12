@@ -19,7 +19,7 @@ public class AutoCompletionCommand implements Runnable {
       AutoComplete.main(new String[]{
           "-n", "devpilot",
           "-o", "devpilot_completion.sh",
-          "com.trinhminhtriet.devpilot.command.standalone.VersionCommand"
+          "com.trinhminhtriet.devpilot.command.common.VersionCommand"
       });
       log.info("Generated autocomplete script: devpilot_completion.sh");
     } catch (Exception e) {

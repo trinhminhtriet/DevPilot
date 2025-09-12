@@ -1,4 +1,4 @@
-package com.trinhminhtriet.devpilot.command.standalone;
+package com.trinhminhtriet.devpilot.command.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

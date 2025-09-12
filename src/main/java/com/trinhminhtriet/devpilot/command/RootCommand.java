@@ -7,7 +7,7 @@ import com.trinhminhtriet.devpilot.command.project.ProjectCommand;
 import com.trinhminhtriet.devpilot.command.scan.ScanCommand;
 import com.trinhminhtriet.devpilot.command.standalone.ConfigCommand;
 import com.trinhminhtriet.devpilot.command.standalone.FigletCommand;
-import com.trinhminhtriet.devpilot.command.standalone.VersionCommand;
+import com.trinhminhtriet.devpilot.command.common.VersionCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
