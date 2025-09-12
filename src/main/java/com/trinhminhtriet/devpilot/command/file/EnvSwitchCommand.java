@@ -1,4 +1,4 @@
-package com.trinhminhtriet.devpilot.command;
+package com.trinhminhtriet.devpilot.command.file;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -7,11 +7,11 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command(
-    name = "env",
+    name = "switch",
     description = "Switch between .env profiles (dev, staging, prod, ...)",
     mixinStandardHelpOptions = true
 )
-public class EnvCommand implements Runnable {
+public class EnvSwitchCommand implements Runnable {
 
   @Option(names = {"--profile", "-p"}, description = "Profile name (e.g. dev, prod, staging)", required = true)
   String profile;
