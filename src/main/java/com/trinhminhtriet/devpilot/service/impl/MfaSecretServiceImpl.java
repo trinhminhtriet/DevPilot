@@ -1,11 +1,12 @@
 package com.trinhminhtriet.devpilot.service.impl;
 
-import com.trinhminhtriet.devpilot.entity.MfaSecret;
 import com.trinhminhtriet.devpilot.dto.CreateMfaSecretRequest;
 import com.trinhminhtriet.devpilot.dto.MfaSecretDto;
 import com.trinhminhtriet.devpilot.dto.UpdateMfaSecretRequest;
+import com.trinhminhtriet.devpilot.entity.MfaSecret;
 import com.trinhminhtriet.devpilot.repository.MfaSecretRepository;
 import com.trinhminhtriet.devpilot.service.MfaSecretService;
+import de.vandermeer.asciitable.AsciiTable;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -59,12 +60,28 @@ public class MfaSecretServiceImpl implements MfaSecretService {
     return repository.findAll().stream().map(this::toDto).collect(Collectors.toList());
   }
 
+  @Override
+  public String toAsciiTable() {
+    List<MfaSecretDto> mfaSecrets = getAll();
+    AsciiTable asciiTable = new AsciiTable();
+    asciiTable.addRule();
+    asciiTable.addRow("ID", "Issuer", "Identifier");
+    asciiTable.addRule();
+    for (MfaSecretDto dto : mfaSecrets) {
+      asciiTable.addRow(dto.getId(), dto.getIssuer(), dto.getIdentifier());
+      asciiTable.addRule();
+    }
+    return asciiTable.render();
+  }
+
   private MfaSecretDto toDto(MfaSecret entity) {
     MfaSecretDto dto = new MfaSecretDto();
     dto.setId(entity.getId());
     dto.setIssuer(entity.getIssuer());
     dto.setIdentifier(entity.getIdentifier());
     dto.setSecret(entity.getSecret());
+    dto.setCreatedAt(entity.getCreatedAt());
+    dto.setUpdatedAt(entity.getUpdatedAt());
     return dto;
   }
 }

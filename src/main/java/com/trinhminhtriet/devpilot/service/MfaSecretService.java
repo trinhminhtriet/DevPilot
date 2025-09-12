@@ -16,4 +16,7 @@ public interface MfaSecretService {
   MfaSecretDto get(Long id);
 
   List<MfaSecretDto> getAll();
+
+  String toAsciiTable();
+
 }
