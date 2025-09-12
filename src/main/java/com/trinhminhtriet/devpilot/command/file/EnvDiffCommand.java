@@ -127,26 +127,43 @@ public class EnvDiffCommand implements Runnable {
   }
 
   private void printTable(List<List<String>> table) {
-    int[] widths = new int[table.get(0).size()];
+    // Markdown table output
+    List<String> header = table.get(0);
+    int cols = header.size();
+    int[] widths = new int[cols];
     for (List<String> row : table) {
-      for (int i = 0; i < row.size(); i++) {
+      for (int i = 0; i < cols; i++) {
         widths[i] = Math.max(widths[i], row.get(i).length());
       }
     }
-    for (List<String> row : table) {
-      for (int i = 0; i < row.size(); i++) {
-        String cell = row.get(i);
-        String out = cell;
-        out = switch (cell) {
-          case "MISSING" -> "\u001B[31mMISSING\u001B[0m";
-          case "DIFF" -> "\u001B[33mDIFF\u001B[0m";
-          case "OK" -> "\u001B[32mOK\u001B[0m";
-          default -> out;
-        };
-        System.out.printf("%-" + widths[i] + "s  ", out);
-      }
-      System.out.println();
+    // Header
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < cols; i++) {
+      sb.append("| ").append(pad(header.get(i), widths[i])).append(" ");
     }
+    sb.append("|");
+    System.out.println(sb);
+    // Separator
+    sb.setLength(0);
+    for (int i = 0; i < cols; i++) {
+      sb.append("|-").append("-".repeat(widths[i])).append("-");
+    }
+    sb.append("|");
+    System.out.println(sb);
+    // Rows
+    for (int r = 1; r < table.size(); r++) {
+      sb.setLength(0);
+      List<String> row = table.get(r);
+      for (int i = 0; i < cols; i++) {
+        sb.append("| ").append(pad(row.get(i), widths[i])).append(" ");
+      }
+      sb.append("|");
+      System.out.println(sb);
+    }
+  }
+
+  private String pad(String s, int w) {
+    return String.format("%-" + w + "s", s);
   }
 
   private void printCsv(List<List<String>> table) {
