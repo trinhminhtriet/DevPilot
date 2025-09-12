@@ -23,6 +23,7 @@ import picocli.CommandLine.Command;
     version = "DevPilot 1.0.0",
     description = "\uD83D\uDE80 All-in-one CLI toolkit for developers: scaffold, manage, automate, and boost productivity across languages!",
     subcommands = {
+        UICommand.class,
         StrapiCommand.class,
         GitCommand.class,
         FileCommand.class,
