@@ -12,7 +12,7 @@ import picocli.CommandLine.Command;
     description = "Kit for environment configuration files",
     subcommands = {
         EnvDiffCommand.class,
-        EnvDiffCommand.class
+        EnvSwitchCommand.class
     },
     mixinStandardHelpOptions = true
 )
