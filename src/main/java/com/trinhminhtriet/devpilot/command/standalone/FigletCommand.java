@@ -27,6 +27,6 @@ public class FigletCommand implements Runnable {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-    log.info(figletText);
+    System.out.println(figletText);
   }
 }
