@@ -1,4 +1,4 @@
-package com.trinhminhtriet.devpilot.command.standalone;
+package com.trinhminhtriet.devpilot.command.common;
 
 import com.trinhminhtriet.devpilot.service.ConfigService;
 import lombok.RequiredArgsConstructor;

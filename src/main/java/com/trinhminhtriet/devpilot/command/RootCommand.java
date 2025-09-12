@@ -7,8 +7,9 @@ import com.trinhminhtriet.devpilot.command.file.FileCommand;
 import com.trinhminhtriet.devpilot.command.git.GitCommand;
 import com.trinhminhtriet.devpilot.command.project.ProjectCommand;
 import com.trinhminhtriet.devpilot.command.scan.ScanCommand;
-import com.trinhminhtriet.devpilot.command.standalone.ConfigCommand;
+import com.trinhminhtriet.devpilot.command.common.ConfigCommand;
 import com.trinhminhtriet.devpilot.command.standalone.FigletCommand;
+import com.trinhminhtriet.devpilot.command.common.InfoCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
@@ -27,6 +28,7 @@ import picocli.CommandLine.Command;
         ListCommand.class,
         FigletCommand.class,
         VersionCommand.class,
+        InfoCommand.class,
         ConfigCommand.class,
         ScanCommand.class,
         EnvCommand.class,
