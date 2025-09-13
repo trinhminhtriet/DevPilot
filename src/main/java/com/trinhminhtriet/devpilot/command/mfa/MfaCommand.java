@@ -1,6 +1,5 @@
 package com.trinhminhtriet.devpilot.command.mfa;
 
-import com.trinhminhtriet.devpilot.service.MfaSecretService;
 import picocli.CommandLine.Command;
 
 @Command(

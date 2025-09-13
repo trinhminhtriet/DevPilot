@@ -6,12 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Slf4j
-@Component
 @RequiredArgsConstructor
 @Command(
     name = "info",
@@ -20,23 +18,23 @@ import picocli.CommandLine.Option;
 )
 public class InfoCommand implements Runnable {
 
-    @Option(names = {"--dir"}, description = "Project directory", required = false)
-    private File dir = new File(".");
+  @Option(names = {"--dir"}, description = "Project directory", required = false)
+  private File dir = new File(".");
 
-    private final ConfigService configService;
+  private final ConfigService configService;
 
-    @Override
-    public void run() {
-        Map<String, Object> config = new HashMap<>(configService.loadConfig());
-        String projectName = config.getOrDefault("projectName", dir.getName()).toString();
-        String author = "";
+  @Override
+  public void run() {
+    Map<String, Object> config = new HashMap<>(configService.loadConfig());
+    String projectName = config.getOrDefault("projectName", dir.getName()).toString();
+    String author = "";
 
-        String license = config.getOrDefault("license", "").toString();
-        String version = config.getOrDefault("version", "0.1.0").toString();
-        log.info("Project: " + projectName);
-        log.info("Version: " + version);
-        log.info("Author: " + author);
-        log.info("License: " + license);
-        log.info("Directory: " + dir.getAbsolutePath());
-    }
+    String license = config.getOrDefault("license", "").toString();
+    String version = config.getOrDefault("version", "0.1.0").toString();
+    log.info("Project: " + projectName);
+    log.info("Version: " + version);
+    log.info("Author: " + author);
+    log.info("License: " + license);
+    log.info("Directory: " + dir.getAbsolutePath());
+  }
 }
