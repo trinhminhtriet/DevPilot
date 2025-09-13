@@ -49,8 +49,8 @@ best practices and templates.
 ### Build
 
 ```shell
-git clone https://github.com/trinhminhtriet/pilot.git
-cd pilot
+git clone https://github.com/trinhminhtriet/DevPilot.git
+cd DevPilot
 mvn clean package
 ```
 
