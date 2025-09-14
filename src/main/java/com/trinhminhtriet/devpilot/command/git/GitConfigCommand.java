@@ -38,6 +38,12 @@ public class GitConfigCommand implements Runnable {
         authorEmail = configService.getValue("user.email");
       }
 
+      new ProcessBuilder("git", "config", "--global", "core.longpaths", "true").start().waitFor();
+      log.info("✅ git config --global core.longpaths true");
+
+      new ProcessBuilder("git", "config", "--global", "core.fileMode", "false").start().waitFor();
+      log.info("✅ git config --global core.fileMode false");
+
       if (authorName != null && !authorName.isEmpty()) {
         new ProcessBuilder("git", "config", "user.name", authorName).directory(dir).start().waitFor();
         log.info("✅ git config user.name \"{}\"", authorName);
