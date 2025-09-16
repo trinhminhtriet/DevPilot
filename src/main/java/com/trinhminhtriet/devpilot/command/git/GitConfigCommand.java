@@ -39,21 +39,21 @@ public class GitConfigCommand implements Runnable {
       }
 
       new ProcessBuilder("git", "config", "--global", "core.longpaths", "true").start().waitFor();
-      log.info("✅ git config --global core.longpaths true");
+      log.info("git config --global core.longpaths true");
 
       new ProcessBuilder("git", "config", "--global", "core.fileMode", "false").start().waitFor();
-      log.info("✅ git config --global core.fileMode false");
+      log.info("git config --global core.fileMode false");
 
       if (authorName != null && !authorName.isEmpty()) {
         new ProcessBuilder("git", "config", "user.name", authorName).directory(dir).start().waitFor();
-        log.info("✅ git config user.name \"{}\"", authorName);
+        log.info("git config user.name \"{}\"", authorName);
       }
       if (authorEmail != null && !authorEmail.isEmpty()) {
         new ProcessBuilder("git", "config", "user.email", authorEmail).directory(dir).start().waitFor();
-        log.info("✅ git config user.email \"{}\"", authorEmail);
+        log.info("git config user.email \"{}\"", authorEmail);
       }
     } catch (Exception e) {
-      log.error("❌ Failed to set git config: {}", e.getMessage());
+      log.error("Failed to set git config: {}", e.getMessage());
     }
   }
 }

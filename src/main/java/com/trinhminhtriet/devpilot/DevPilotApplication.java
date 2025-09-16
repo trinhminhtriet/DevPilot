@@ -8,7 +8,7 @@ public class DevPilotApplication {
 
   public static void main(String[] args) {
     new SpringApplicationBuilder(DevPilotApplication.class)
-        .logStartupInfo(false) // giảm log rác
+        .logStartupInfo(false) // reduce log noise
         .run(args);
   }
 

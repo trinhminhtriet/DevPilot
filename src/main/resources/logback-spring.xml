@@ -4,7 +4,13 @@
   <!-- Console Appender -->
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
-    <pattern>%highlight([%d{yyyy-MM-dd HH:mm:ss}] %-5level - %msg%n)</pattern>
+      <pattern>%highlight([%d{yyyy-MM-dd HH:mm:ss}] %replace(%-5level){
+        'INFO','INFO ✅'
+        'ERROR','ERROR ❌'
+        'DEBUG','DEBUG 🐛'
+        'WARN','WARN ⚠️'
+        } %msg%n)
+      </pattern>
     </encoder>
   </appender>
 

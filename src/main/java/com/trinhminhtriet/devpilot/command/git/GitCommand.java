@@ -16,8 +16,9 @@ import picocli.CommandLine.Command;
     mixinStandardHelpOptions = true
 )
 public class GitCommand implements Runnable {
-    @Override
-    public void run() {
-        log.info("Use subcommands: init, config");
-    }
+
+  @Override
+  public void run() {
+    log.info("Use subcommands: init, config");
+  }
 }

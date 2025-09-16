@@ -8,8 +8,9 @@ import picocli.CommandLine.Command;
 @Component
 @Command(name = "interactive", description = "Interactive project initialization", mixinStandardHelpOptions = true)
 public class InteractiveCommand implements Runnable {
-    @Override
-    public void run() {
-        log.info("Interactive: Starting interactive mode...");
-    }
+
+  @Override
+  public void run() {
+    log.info("Interactive: Starting interactive mode...");
+  }
 }
