@@ -28,13 +28,16 @@ public class ProjectInitCommand implements Runnable {
 
   @Override
   public void run() {
+
+    String interfaceName = ProjectActionService.class.getSimpleName();
+    String implementationName = lang.toLowerCase() + interfaceName + "Impl";
+
     String supportedLangs = String.join(", ", projectActionServices.keySet());
-    if (!projectActionServices.containsKey(lang.toLowerCase())) {
+    if (!projectActionServices.containsKey(implementationName)) {
       log.error("Unsupported language:{}. Supported languages are: {}", lang, supportedLangs);
       return;
     }
-    String interfaceName = ProjectActionService.class.getSimpleName();
-    String implementationName = lang.toLowerCase() + interfaceName + "Impl";
+
     ProjectActionService service = projectActionServices.get(implementationName);
     if (service == null) {
       log.error("Unsupported language: {}", lang);

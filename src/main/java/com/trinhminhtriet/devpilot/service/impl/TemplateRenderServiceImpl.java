@@ -36,9 +36,9 @@ public class TemplateRenderServiceImpl implements TemplateRenderService {
       try (FileWriter writer = new FileWriter(outputFile)) {
         template.process(dataMapping, writer);
       }
-      log.info("✅ Generated file: {}", outputFile);
+      log.info("Generated file: {}", outputFile);
     } catch (Exception e) {
-      log.error("❌ Error generating template {} -> {}", templatePath, outputFile, e);
+      log.error("Error generating template {} -> {}", templatePath, outputFile, e);
     }
   }
 

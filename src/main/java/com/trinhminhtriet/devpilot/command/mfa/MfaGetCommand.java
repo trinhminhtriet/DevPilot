@@ -1,8 +1,10 @@
 package com.trinhminhtriet.devpilot.command.mfa;
 
+import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+@Slf4j
 @Command(name = "get", description = "Get MFA secret by id", mixinStandardHelpOptions = true)
 public class MfaGetCommand implements Runnable {
 
@@ -11,6 +13,6 @@ public class MfaGetCommand implements Runnable {
 
   @Override
   public void run() {
-    System.out.println("get");
+    log.info("MFA secret id: " + id);
   }
 }

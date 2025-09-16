@@ -8,8 +8,9 @@ import picocli.CommandLine.Command;
 @Component
 @Command(name = "format", description = "Format project code", mixinStandardHelpOptions = true)
 public class FormatCommand implements Runnable {
-    @Override
-    public void run() {
-        log.info("Format: Formatting code...");
-    }
+
+  @Override
+  public void run() {
+    log.info("Format: Formatting code...");
+  }
 }

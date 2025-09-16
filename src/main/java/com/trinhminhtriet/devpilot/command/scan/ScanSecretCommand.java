@@ -6,22 +6,23 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import picocli.CommandLine;
+import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 
-@CommandLine.Command(
+@Command(
     name = "secret",
     description = "Scan source code for secrets (passwords, tokens, API keys, ...)",
     mixinStandardHelpOptions = true
 )
 public class ScanSecretCommand implements Runnable {
 
-  @CommandLine.Option(names = {"--path", "-p"}, description = "Path to scan", defaultValue = ".")
+  @Option(names = {"--path", "-p"}, description = "Path to scan", defaultValue = ".")
   private File path;
 
-  @CommandLine.Option(names = {"--exclude", "-e"}, description = "Exclude pattern (glob)")
+  @Option(names = {"--exclude", "-e"}, description = "Exclude pattern (glob)")
   private String exclude;
 
-  @CommandLine.Option(names = {"--report", "-r"}, description = "Output report file")
+  @Option(names = {"--report", "-r"}, description = "Output report file")
   private File reportFile;
 
   @Override
