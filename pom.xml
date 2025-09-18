@@ -104,6 +104,12 @@
       <version>${lanterna.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>dnsjava</groupId>
+      <artifactId>dnsjava</artifactId>
+      <version>${dnsjava.version}</version>
+    </dependency>
+
   </dependencies>
 
   <properties>
@@ -121,6 +127,7 @@
     <lombok.version>1.18.40</lombok.version>
     <lanterna.version>3.1.3</lanterna.version>
     <asciitable.version>0.3.2</asciitable.version>
+    <dnsjava.version>3.6.3</dnsjava.version>
   </properties>
 
   <build>
