@@ -36,6 +36,7 @@ import picocli.CommandLine.Command;
         EnvCommand.class,
         ProjectCommand.class,
         AutoCompletionCommand.class,
+        DnsRecordCommand.class,
         MfaCommand.class
     }
 )
