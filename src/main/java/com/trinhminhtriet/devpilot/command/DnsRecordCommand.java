@@ -50,7 +50,7 @@ public class DnsRecordCommand implements Runnable {
     try (FileWriter writer = new FileWriter(path)) {
       writer.write("Type,Name,TTL,Data\n");
       for (Record record : records) {
-        writer.write(String.format("%s,%s,%d,%s\n",
+        writer.write(String.format("%s,%s,%d,%s %n",
             record.getType(),
             record.getName(),
             record.getTTL(),
